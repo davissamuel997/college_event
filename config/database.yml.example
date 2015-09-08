@@ -1,0 +1,20 @@
+development:
+  adapter: postgresql
+  encoding: utf8
+  reconnect: false
+  database: college_event_dev
+  pool: 500
+  host: localhost
+  username: postgres
+  password: password
+  password: password
+
+test:
+    adapter: postgresql
+    encoding: utf8
+    reconnect: false
+    database: college_event_test
+    pool: 5
+    host: localhost
+    username: postgres
+    password: password

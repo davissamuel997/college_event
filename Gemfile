@@ -1,10 +1,10 @@
 source 'https://rubygems.org'
 
-
+ruby '2.2.2'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+# Use pg as the database for Active Record
+gem 'pg'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -32,6 +32,25 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'haml-rails'
+gem 'pg'
+gem 'pundit'
+gem 'simple_form'
+gem 'upmin-admin'
+gem 'rails_email_validator'
+gem 'activerecord-session_store'
+
+gem 'faker'
+gem 'kaminari'
+gem "paperclip", "~> 4.3"
+gem 'aws-sdk', '< 2.0'
+
+gem 'devise'
+gem 'devise_security_extension'
+gem 'devise_invitable'
+gem 'omniauth'
+gem 'devise-token_authenticatable'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
@@ -43,5 +62,19 @@ group :development do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+
+  gem 'byebug'
+
+  gem 'better_errors'
+  gem 'binding_of_caller', :platforms=>[:mri_21]
+  gem 'html2haml'
+  gem 'thin'
+  gem 'quiet_assets'
+  gem 'rails_apps_pages'
+  gem 'rails_layout'
 end
 
+group :production do
+  gem 'rails_12factor'
+  gem 'unicorn'
+end
