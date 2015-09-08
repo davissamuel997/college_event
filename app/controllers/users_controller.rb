@@ -3,7 +3,6 @@ class UsersController < ApplicationController
   respond_to :json, :html
 
 	def welcome
-		p 'hello world'
 	end
 
   def user_params
