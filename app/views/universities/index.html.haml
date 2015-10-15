@@ -3,6 +3,9 @@
   .content-wrapper
     %h3
       Universities
+      - if current_user.present? && current_user.has_role?(:super_admin)
+        .pull-right
+          %a.btn.btn-sm.btn-info{:href => "/universities/new"} New University
     .row
       / START dashboard main content
       %section.col-md-12
