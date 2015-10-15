@@ -21,6 +21,8 @@ Rails.application.routes.draw do
 
   resources :users
 
+  resources :universities
+
   root :to => 'users#welcome'
 
 end
