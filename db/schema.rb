@@ -11,10 +11,49 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150908222010) do
+ActiveRecord::Schema.define(version: 20151015172347) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "events", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "category_id"
+    t.text     "description"
+    t.time     "start_time"
+    t.date     "date"
+    t.string   "contact_phone"
+    t.string   "contact_email"
+    t.integer  "university_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "events", ["category_id"], name: "index_events_on_category_id", using: :btree
+  add_index "events", ["university_id"], name: "index_events_on_university_id", using: :btree
+
+  create_table "organization_users", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "organization_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "organization_users", ["organization_id"], name: "index_organization_users_on_organization_id", using: :btree
+  add_index "organization_users", ["user_id"], name: "index_organization_users_on_user_id", using: :btree
+
+  create_table "organizations", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "universities", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
