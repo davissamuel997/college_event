@@ -51,7 +51,7 @@
                 .panel-body
                   .viewcode-example
                     .table-responsive
-                      %div{'ng-if' => 'requestControl.phoneNumbers.length > 0 && loaderControl.isLoading === false'}
+                      %div{'ng-if' => 'requestControl.universities.length > 0 && loaderControl.isLoading === false'}
                         %table.table.table-striped.table-bordered.table-hover
                           %thead
                             %tr
@@ -68,13 +68,13 @@
                               %th.text-center
 
                           %tbody
-                            %tr{'ng-repeat' => 'phone_number in requestControl.phoneNumbers'}
+                            %tr{'ng-repeat' => 'university in requestControl.universities'}
                               %td.text-center
                                 %button.btn.btn-link.make-black
-                                  {{phone_number.name}}
+                                  {{university.name}}
                               %td.text-center
                                 %button.btn.btn-link.make-black
-                                  {{phone_number.campaign_name}}
+                                  {{university.description}}
                               %td.text-center
                                 %button.btn.btn-link.make-black
                                   {{phone_number.phone_number}}
@@ -103,7 +103,7 @@
                                     {{ page }}
                                   %a.btn{ 'ng-show' => '$last && requestControl.current_page!=page', 'ng-click' => "requestControl.changePage(page)" } &gt;&gt;
 
-                      %div{'ng-if' => 'requestControl.phoneNumbers.length === 0 && loaderControl.isLoading === false'}
+                      %div{'ng-if' => 'requestControl.universities.length === 0 && loaderControl.isLoading === false'}
                         %h4 Currently, there are no phone numbers based on the parameters. Please refine your search.
 
                       %div{'ng-if' => 'loaderControl.isLoading === true'}
