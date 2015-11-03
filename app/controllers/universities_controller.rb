@@ -5,6 +5,20 @@ class UniversitiesController < ApplicationController
 	def welcome
 	end
 
+	def new
+		@university = University.new
+	end
+
+	def create
+		@university = University.new(university_params)
+
+		if @university.save
+			redirect_to universities_path
+		else
+			render :new
+		end
+	end
+
 	# /get_universities
 	def get_universities
 		response = University.get_universities(params)
