@@ -2,7 +2,7 @@ class UniversitiesController < ApplicationController
 
   respond_to :json, :html
 
-  before_filter :set_university, :only => [:show, :edit, :update]
+  before_filter :set_university, :only => [:show, :edit, :update, :destroy]
 
 	def welcome
 	end
@@ -36,6 +36,12 @@ class UniversitiesController < ApplicationController
 		else
 			render :edit
 		end
+	end
+
+	def destroy
+		@university.destroy
+
+		redirect_to universities_path
 	end
 
 	# /get_universities
