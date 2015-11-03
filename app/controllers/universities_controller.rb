@@ -2,7 +2,15 @@ class UniversitiesController < ApplicationController
 
   respond_to :json, :html
 
+  before_filter :set_university, :only => [:show, :edit, :update]
+
 	def welcome
+	end
+
+	def index
+	end
+
+	def show
 	end
 
 	def new
@@ -20,12 +28,9 @@ class UniversitiesController < ApplicationController
 	end
 
 	def edit
-		@university = University.find(params[:id])
 	end
 
 	def update
-		@university = University.find(params[:id])
-
 		if @university.present? && @university.is_a?(University) && @university.update(university_params)
 			redirect_to universities_path
 		else
@@ -44,5 +49,9 @@ class UniversitiesController < ApplicationController
     params.require(:university).permit(:name, :description)
   end
 
-  private :university_params
+  def set_university
+		@university = University.find(params[:id])
+  end
+
+  private :university_params, :set_university
 end
