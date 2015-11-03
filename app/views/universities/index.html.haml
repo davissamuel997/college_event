@@ -56,15 +56,9 @@
                           %thead
                             %tr
                               %th.text-center
-                                %strong Number Name
+                                %strong Name
                               %th.text-center
-                                %strong Campaign Name
-                              %th.text-center
-                                %strong Phone Number
-                              %th.text-center
-                                %strong Redirect Number
-                              %th.text-center
-                                %strong Call Count
+                                %strong Description
                               %th.text-center
 
                           %tbody
@@ -76,19 +70,7 @@
                                 %button.btn.btn-link.make-black
                                   {{university.description}}
                               %td.text-center
-                                %button.btn.btn-link.make-black
-                                  {{phone_number.phone_number}}
-                              %td.text-center
-                                %button.btn.btn-link.make-black
-                                  {{phone_number.redirect_number}}
-                              %td.text-center
-                                %button.btn.btn-link.make-black
-                                  {{phone_number.call_count}}
-                              %td.text-center
-                                %button.btn.btn-link{type: "button", 'data-toggle' => 'modal', href: "#phone-number-calls", 'ng-if' => 'phone_number.call_count > 0', 'ng-click' => 'requestControl.setCallsModal(phone_number)'}
-                                  View Calls
-                                %button.btn.btn-link.make-black{'ng-if' => 'phone_number.call_count === 0'}
-                                  View Calls
+                                %a.btn.btn-xs.btn-danger{'ng-href' => "/universities/{{university.id}}/edit"} Edit
 
                         .span
                           .pull-right

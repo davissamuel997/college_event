@@ -19,6 +19,20 @@ class UniversitiesController < ApplicationController
 		end
 	end
 
+	def edit
+		@university = University.find(params[:id])
+	end
+
+	def update
+		@university = University.find(params[:id])
+
+		if @university.present? && @university.is_a?(University) && @university.update(university_params)
+			redirect_to universities_path
+		else
+			render :edit
+		end
+	end
+
 	# /get_universities
 	def get_universities
 		response = University.get_universities(params)
