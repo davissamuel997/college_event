@@ -16,6 +16,9 @@
                     = f.input :name, :label => "Name", :input_html => { :class => 'form-control input-sm' }
 
                   %p
+                    = f.association :university, :label => "University", :label_method => :name, :value_method => :id, :input_html => { :class => 'form-control input-sm chosen-select' }
+
+                  %p
                     = f.association :organization_type, :label => "RSO Type", :label_method => :name, :value_method => :id, :input_html => { :class => 'form-control input-sm chosen-select' }
 
                   %p

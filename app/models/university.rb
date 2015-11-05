@@ -2,6 +2,10 @@ class University < ActiveRecord::Base
 
 	has_many :events, :dependent => :destroy
 
+	has_many :organizations
+
+  validates_presence_of :name
+
 	def get_params
 		{
 			university_id: id,
@@ -16,7 +20,7 @@ class University < ActiveRecord::Base
 		data[:universities] = University.find_by_sql("
 																									SELECT universities.* FROM universities 
 																									ORDER BY name ASC
-																								 ").map { |university| University.get_params }
+																								 ").map { |university| university.get_params }
 
 		data
 	end

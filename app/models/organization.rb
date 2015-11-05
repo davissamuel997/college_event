@@ -4,6 +4,13 @@ class Organization < ActiveRecord::Base
 	has_many :users, through: :organization_users
 
 	belongs_to :organization_type
+	belongs_to :university
+
+  validates_presence_of :name
+	validates_uniqueness_of :name, scope: :university_id
+
+	validates_presence_of :organization_type_id
+	validates_presence_of :university_id
 
 	def get_params
 		{
