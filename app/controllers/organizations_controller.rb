@@ -11,7 +11,7 @@ class OrganizationsController < ApplicationController
 	end
 
 	def new
-		@organization = University.new
+		@organization = Organization.new
 	end
 
 	def create

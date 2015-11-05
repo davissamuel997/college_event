@@ -23,6 +23,8 @@ Rails.application.routes.draw do
 
   resources :organizations
 
+  resources :organization_types
+
   resources :universities
 
   get 'get_universities' => 'universities#get_universities'
