@@ -2,6 +2,14 @@ class University < ActiveRecord::Base
 
 	has_many :events, :dependent => :destroy
 
+	def get_params
+		{
+			university_id: id,
+			name:          name,
+			description:   description
+		}
+	end
+
 	def self.get_universities(options = {})
 		data = {:errors => false}
 

@@ -2,6 +2,14 @@ class OrganizationType < ActiveRecord::Base
 
   has_many :organizations
 
+  def get_params
+  	{
+  		organization_type_id: id,
+  		name:                 name,
+  		description:          description
+  	}
+  end
+
 	def self.get_organization_types(options = {})
 		data = {:errors => false}
 

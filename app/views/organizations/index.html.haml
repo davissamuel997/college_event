@@ -23,6 +23,8 @@
                               %th.text-center
                                 %strong Name
                               %th.text-center
+                                %strong RSO Type
+                              %th.text-center
                                 %strong Description
                               %th.text-center
 
@@ -30,12 +32,15 @@
                             %tr{'ng-repeat' => 'organization in requestControl.organizations'}
                               %td.text-center
                                 %button.btn.btn-link.make-black
-                                  {{organization_type.name}}
+                                  {{organization.name}}
                               %td.text-center
                                 %button.btn.btn-link.make-black
-                                  {{organization_type.description}}
+                                  {{organization.organization_type}}
                               %td.text-center
-                                %a.btn.btn-xs.btn-warning{'ng-href' => "/organizations/{{organization.id}}/edit"} Edit
+                                %button.btn.btn-link.make-black
+                                  {{organization.description}}
+                              %td.text-center
+                                %a.btn.btn-xs.btn-warning{'ng-href' => "/organizations/{{organization.organization_id}}/edit"} Edit
 
                         .span
                           .pull-right

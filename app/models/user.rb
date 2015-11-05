@@ -13,6 +13,17 @@ class User < ActiveRecord::Base
 
   before_save :set_full_name
 
+  def get_params
+    {
+      user_id:      id,
+      full_name:    full_name,
+      first_name:   first_name,
+      last_name:    last_name,
+      email:        email,
+      phone_number: phone_number
+    }
+  end
+
   def set_full_name
     self.full_name = "#{self.first_name} #{self.last_name}"
   end
