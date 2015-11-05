@@ -21,6 +21,8 @@ Rails.application.routes.draw do
 
   resources :users
 
+  resources :organizations
+
   resources :universities
 
   get 'get_universities' => 'universities#get_universities'
