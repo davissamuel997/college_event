@@ -50,7 +50,7 @@
                                     {{ page }}
                                   %a.btn{ 'ng-show' => '$last && requestControl.current_page!=page', 'ng-click' => "requestControl.changePage(page)" } &gt;&gt;
 
-                      %div{'ng-if' => 'requestControl.universities.length === 0 && loaderControl.isLoading === false'}
+                      %div{'ng-if' => 'requestControl.organization_types.length === 0 && loaderControl.isLoading === false'}
                         %h4 Currently, there are organization types.
 
                       %div{'ng-if' => 'loaderControl.isLoading === true'}

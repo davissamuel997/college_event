@@ -43,7 +43,7 @@ class OrganizationsController < ApplicationController
 
 	# /get_organizations
 	def get_organizations
-		response = University.get_organizations(params)
+		response = Organization.get_organizations(params)
 
 		respond_with response
 	end
