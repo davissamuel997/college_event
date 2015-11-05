@@ -5,6 +5,7 @@ class OrganizationTypesController < ApplicationController
   before_filter :set_organization_type, :only => [:show, :edit, :update, :destroy]
 
 	def index
+		@organization_types = OrganizationType.all.order('name ASC')
 	end
 
 	def show
@@ -43,7 +44,7 @@ class OrganizationTypesController < ApplicationController
 
 	# /get_organizations
 	def get_organization_types
-		response = OrganizationType.organization_types(params)
+		response = OrganizationType.get_organization_types(params)
 
 		respond_with response
 	end

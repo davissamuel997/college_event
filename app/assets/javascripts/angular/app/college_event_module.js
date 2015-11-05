@@ -1,4 +1,4 @@
-var zombieBox = angular.module('zombieBox', 
+var collegeEvent = angular.module('zombieBox', 
 	[
 		'ngResource',
 		'ui.bootstrap',
@@ -9,7 +9,7 @@ var zombieBox = angular.module('zombieBox',
 		datepickerPopupConfig.toggleWeeksText = null;
 	});
 	
-zombieBox.run(function($rootScope, $templateCache) {
+collegeEvent.run(function($rootScope, $templateCache) {
    $rootScope.$on('$viewContentLoaded', function() {
       $templateCache.removeAll();
    });

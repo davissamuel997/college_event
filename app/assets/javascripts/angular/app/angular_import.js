@@ -6,7 +6,7 @@
 *= require angular/vendor/pusher-angular.js
 
 *= require angular/app/directives/chosen.js
-*= require angular/app/zombie_box_module.js
+*= require angular/app/college_event_module.js
 *= require_tree ./services
 *= require_tree ./controllers
 */

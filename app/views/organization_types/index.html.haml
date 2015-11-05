@@ -1,4 +1,4 @@
-%section
+%section{'ng-controller' => "OrganizationTypesController"}
   / START Page content
   .content-wrapper
     %h3
@@ -16,7 +16,7 @@
                 .panel-body
                   .viewcode-example
                     .table-responsive
-                      %div{'ng-if' => 'requestControl.universities.length > 0 && loaderControl.isLoading === false'}
+                      %div{'ng-if' => 'requestControl.organization_types.length > 0 && loaderControl.isLoading === false'}
                         %table.table.table-striped.table-bordered.table-hover
                           %thead
                             %tr
@@ -27,15 +27,15 @@
                               %th.text-center
 
                           %tbody
-                            %tr{'ng-repeat' => 'university in requestControl.universities'}
+                            %tr{'ng-repeat' => 'organization_type in requestControl.organization_types'}
                               %td.text-center
                                 %button.btn.btn-link.make-black
-                                  {{university.name}}
+                                  {{organization_type.name}}
                               %td.text-center
                                 %button.btn.btn-link.make-black
-                                  {{university.description}}
+                                  {{organization_type.description}}
                               %td.text-center
-                                %a.btn.btn-xs.btn-warning{'ng-href' => "/universities/{{university.id}}/edit"} Edit
+                                %a.btn.btn-xs.btn-warning{'ng-href' => "/organization_types/{{organization_type.id}}/edit"} Edit
 
                         .span
                           .pull-right
@@ -51,14 +51,14 @@
                                   %a.btn{ 'ng-show' => '$last && requestControl.current_page!=page', 'ng-click' => "requestControl.changePage(page)" } &gt;&gt;
 
                       %div{'ng-if' => 'requestControl.universities.length === 0 && loaderControl.isLoading === false'}
-                        %h4 Currently, there are no phone numbers based on the parameters. Please refine your search.
+                        %h4 Currently, there are organization types.
 
                       %div{'ng-if' => 'loaderControl.isLoading === true'}
                         .loader-css
                           .load-container.load8
                             .loader
                               Loading...
-                          %h5 Fetching Phone Numbers...
+                          %h5 Fetching Organization Types...
 
                     %a.btn-view-code{:href => "javascript:;", :style => "display: none;"}
                       %i.fa.fa-code
