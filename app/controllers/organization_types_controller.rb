@@ -11,7 +11,7 @@ class OrganizationTypesController < ApplicationController
 	end
 
 	def new
-		@organization = OrganizationType.new
+		@organization_type = OrganizationType.new
 	end
 
 	def create
