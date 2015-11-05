@@ -16,7 +16,7 @@ class University < ActiveRecord::Base
 		data[:universities] = University.find_by_sql("
 																									SELECT universities.* FROM universities 
 																									ORDER BY name ASC
-																								 ")
+																								 ").map { |university| University.get_params }
 
 		data
 	end

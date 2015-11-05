@@ -16,7 +16,7 @@ class OrganizationType < ActiveRecord::Base
 		data[:organization_types] = OrganizationType.find_by_sql("
 																									SELECT organization_types.* FROM organization_types 
 																									ORDER BY name ASC
-																								 ")
+																								 ").map { |organization_type| organization_type.get_params }
 
 		data
 	end
