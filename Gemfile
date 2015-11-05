@@ -33,7 +33,6 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'capistrano-rails', group: :development
 
 gem 'haml-rails'
-gem 'pg'
 gem 'pundit'
 gem 'simple_form'
 gem 'upmin-admin'
@@ -64,8 +63,6 @@ group :development do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
-
-  gem 'byebug'
 
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_21]
