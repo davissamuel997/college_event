@@ -224,15 +224,15 @@
               %a.no-submenu{"data-toggle" => "", :href => "/", :title => "Profile"}
                 %em.fa.fa-file-text-o
                 %span.item-text Profile
+            %li
+              %a.no-submenu{"data-toggle" => "", :href => "/organizations", :title => "RSOs"}
+                %em.fa.fa-file-text-o
+                %span.item-text RSOs
             - if current_user.present? && current_user.has_role?(:super_admin)
               %li
                 %a.no-submenu{"data-toggle" => "", :href => "/organization_types", :title => "Organization Type"}
                   %em.fa.fa-file-text-o
                   %span.item-text RSO Types
-            %li
-              %a.no-submenu{"data-toggle" => "", :href => "/organizations", :title => "RSOs"}
-                %em.fa.fa-file-text-o
-                %span.item-text RSOs
             %li
               %a.no-submenu{"data-toggle" => "", :href => "/universities", :title => "Universities"}
                 %em.fa.fa-file-text-o
