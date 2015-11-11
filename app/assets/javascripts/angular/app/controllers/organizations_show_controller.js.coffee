@@ -1,4 +1,4 @@
-collegeEvent.controller 'OrganizationsShowController', ['$scope', '$http', 'OrganizationsService', '$location', '$pusher', '$sce', ($scope, $http, OrganizationsService, $location, $pusher, $sce) ->
+collegeEvent.controller 'OrganizationsShowController', ['$scope', '$http', 'OrganizationsShowService', '$location', '$pusher', '$sce', ($scope, $http, OrganizationsShowService, $location, $pusher, $sce) ->
 
 ################################################################
 ############## Initial Page Load / Reset #######################

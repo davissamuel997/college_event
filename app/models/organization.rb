@@ -3,6 +3,8 @@ class Organization < ActiveRecord::Base
   has_many :organization_users
 	has_many :users, through: :organization_users
 
+	has_many :events
+
 	belongs_to :organization_type
 	belongs_to :university
 
@@ -17,8 +19,8 @@ class Organization < ActiveRecord::Base
 			organization_id:   id,
 			name:              name,
 			organization_type: organization_type.try(:name),
-			description:       description
-			events:            events.order('created_at DESC').map{ |event| event.get_params }
+			description:       description,
+			events:            events.order('date DESC').map{ |event| event.get_params }
 		}
 	end
 
