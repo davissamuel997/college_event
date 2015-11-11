@@ -48,6 +48,12 @@ class OrganizationsController < ApplicationController
 		respond_with response
 	end
 
+	def get_organization
+		response = Organization.get_organization(params)
+
+		respond_with response
+	end
+
   def organization_params
     params.require(:organization).permit(:name, :organization_type_id, :description, :university_id)
   end

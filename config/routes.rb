@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   get 'get_universities' => 'universities#get_universities'
   get 'get_organizations' => 'organizations#get_organizations'
   get 'get_organization_types' => 'organization_types#get_organization_types'
+  get 'get_organization' => 'organizations#get_organization'
 
   root :to => 'users#welcome'
 
