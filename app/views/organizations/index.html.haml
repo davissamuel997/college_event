@@ -40,7 +40,9 @@
                                 %button.btn.btn-link.make-black
                                   {{organization.description}}
                               %td.text-center
-                                %a.btn.btn-xs.btn-warning{'ng-href' => "/organizations/{{organization.organization_id}}/edit"} Edit
+                                .btn-group
+                                  %a.btn.btn-xs.btn-success{'ng-href' => "/organizations/{{organization.organization_id}}"} Details
+                                  %a.btn.btn-xs.btn-warning{'ng-href' => "/organizations/{{organization.organization_id}}/edit"} Edit
 
                         .span
                           .pull-right
