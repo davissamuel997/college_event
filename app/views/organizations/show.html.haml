@@ -13,6 +13,20 @@
         .content
           .col-md-12
             .panel
+              .panel-body
+                %p
+                  {{requestControl.organization.organization_type}}
+                %p
+                  {{requestControl.organization.description}}
+
+
+    / START dashboard main content
+    %section.col-md-12
+      / START chart
+      .row
+        .content
+          .col-md-12
+            .panel
               .panel-heading
                 %h4 Events
               .panel-body

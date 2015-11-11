@@ -16,11 +16,12 @@ class Organization < ActiveRecord::Base
 
 	def get_params
 		{
-			organization_id:   id,
-			name:              name,
-			organization_type: organization_type.try(:name),
-			description:       description,
-			events:            events.order('date DESC').map{ |event| event.get_params }
+			organization_id:      id,
+			name:                 name,
+			organization_type_id: organization_type_id,
+			organization_type:    organization_type.try(:name),
+			description:          description,
+			events:               events.order('date DESC').map{ |event| event.get_params }
 		}
 	end
 
