@@ -62,6 +62,14 @@ class EventsController < ApplicationController
 		respond_with response
 	end
 
+	def create_event_comment
+    params[:user_id] = current_user.id
+
+    response = Event.create_event_comment(params)
+
+    respond_with response
+	end
+
   def event_params
     params.require(:event).permit(:name, :category_id, :start_time, :date, :contact_phone, :contact_email, :university_id, :event_type_id, :event_status_id)
   end
