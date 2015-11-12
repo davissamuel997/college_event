@@ -14,40 +14,6 @@
           .content
             .col-md-12
               .panel
-                .panel-heading
-                  .panel.panel-info
-                    .panel-heading
-                      %h5
-                        %i.icon-magnifier.make-black
-                        %strong.make-black Search Universities
-
-                    .panel-body
-                      %form
-                        %table.table
-                          %thead
-                            %th{:bgcolor => "#464368", :style => "color: #FFF; text-align: center; width: 200px;"}
-                              %strong University
-                            %th{:bgcolor => "#464368", :style => "color: #FFF; text-align: center;"}
-                              %strong Location
-                            %th{:bgcolor => "#464368", :style => "color: #FFF; text-align: center;"}
-                          %tbody
-                            %tr
-                              %td{:style => 'width: 200px;'}
-                                %select.form-control.input-sm{:chosen => '','ng-options' => 'organization.id as organization.name for organization in requestControl.organizations', 'ng-model' => 'requestControl.params.organization_id'}
-                                  %option
-                              %td{:style => 'width: 200px;'}
-                                %select.form-control.input-sm{:chosen => '','ng-options' => 'organization.id as organization.name for organization in requestControl.organizations', 'ng-model' => 'requestControl.params.organization_id'}
-                                  %option
-                              %td
-                                .pull-right
-                                  .input-group-btn
-                                    %button.btn.btn-sm.btn-default{'ng-click' => 'requestControl.resetSearchParams()'} Reset
-                                    %button.btn.btn-sm.btn-success{'ng-click' => 'requestControl.getPhoneNumberReportData()'} Search
-
-              .panel
-                .panel-heading
-                  %h4.panel-title
-                    %span.badge.badge-info Stats: {{requestControl.dateRange}}
                 .panel-body
                   .viewcode-example
                     .table-responsive
@@ -55,17 +21,22 @@
                         %table.table.table-striped.table-bordered.table-hover
                           %thead
                             %tr
-                              %th.text-center
+                              %th{:bgcolor => "#464368", :style => "color: #FFF; text-align: center; width: 200px;"}
                                 %strong Name
-                              %th.text-center
+                              %th{:bgcolor => "#464368", :style => "color: #FFF; text-align: center; width: 200px;"}
+                                %strong Admin
+                              %th{:bgcolor => "#464368", :style => "color: #FFF; text-align: center; width: 200px;"}
                                 %strong Description
-                              %th.text-center
+                              %th{:bgcolor => "#464368", :style => "color: #FFF; text-align: center; width: 200px;"}
 
                           %tbody
                             %tr{'ng-repeat' => 'university in requestControl.universities'}
                               %td.text-center
                                 %button.btn.btn-link.make-black
                                   {{university.name}}
+                              %td.text-center
+                                %button.btn.btn-link.make-black
+                                  {{university.user_full_name}}
                               %td.text-center
                                 %button.btn.btn-link.make-black
                                   {{university.description}}

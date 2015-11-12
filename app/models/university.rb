@@ -22,9 +22,11 @@ class University < ActiveRecord::Base
 
 	def get_params
 		{
-			university_id: id,
-			name:          name,
-			description:   description
+			university_id:  id,
+			name:           name,
+			description:    description,
+			user_id:        user_id,
+			user_full_name: user.try(:full_name)          
 		}
 	end
 
