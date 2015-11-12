@@ -3,7 +3,7 @@
   .content-wrapper
     %h3
       Dashboard
-      - if current_user.present? && current_user.has_role?(:admin)
+      - if current_user.present? && current_user.has_role?(:admin) || true
         .pull-right
           %a.btn.btn-sm.btn-info{:href => "/events/new"} New Event
     .row
@@ -55,7 +55,7 @@
                                   %a.btn{ 'ng-show' => '$last && requestControl.current_page!=page', 'ng-click' => "requestControl.changePage(page)" } &gt;&gt;
 
                       %div{'ng-if' => 'requestControl.events.length === 0 && loaderControl.isLoading === false'}
-                        %h4 Currently, there are events.
+                        %h4 Currently, there are no events.
 
                       %div{'ng-if' => 'loaderControl.isLoading === true'}
                         .loader-css

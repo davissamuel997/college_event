@@ -1,0 +1,45 @@
+.row
+  .content
+    .col-md-12
+      .panel
+        .panel-body
+          .viewcode-example
+            = simple_form_for @event do |f|
+              %fieldset
+                %legend.section
+                  %h5
+                    %i.icon-note
+                    %strong General
+                    %strong.pull-right.make-red * Required
+                .control-group
+                  %p
+                    = f.association :organization, value_method: :id, label_method: :name, :label => "Organization", input_html: { :class => 'form-control input-sm chosen-select' }
+                  %p
+                    = f.association :event_status, value_method: :id, label_method: :name, :label => "Event Status", input_html: { :class => 'form-control input-sm chosen-select' }
+                  %p
+                    = f.association :event_type, value_method: :id, label_method: :name, :label => "Event Type", input_html: { :class => 'form-control input-sm chosen-select' }
+                  %p
+                    = f.input :name, :label => "First Name", :input_html => { :class => 'form-control input-sm' }
+
+                  %p
+                    = f.input :description, :label => "Description", :input_html => { :class => 'form-control input-sm' }
+
+                  %p
+                    = f.input :contact_phone, :label => "Contact Phone", :input_html => { :class => 'form-control input-sm' }
+
+                  %p
+                    = f.input :contact_email, :label => "Contact Email", :input_html => { :class => 'form-control input-sm' }
+                  %p
+                    = f.input :address, :label => "Address", :input_html => { :class => 'form-control input-sm' }
+
+                  %p
+                    = f.input :state, :label => "State", :input_html => { :class => 'form-control input-sm' }
+                  %p
+                    = f.input :postal_code, :label => "Postal Code", :input_html => { :class => 'form-control input-sm' }
+
+              .form-actions
+                %p
+                  .btn-group.no-margin{style: "float: right;"}
+                    = link_to "Cancel", root_path, :class => "btn btn-sm btn-default"
+
+                    = f.submit "Save Event", :class => "btn btn-sm btn-success"

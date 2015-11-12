@@ -43,6 +43,8 @@ class EventsController < ApplicationController
 
 	# /get_events
 	def get_events
+		params[:current_user] = current_user
+
 		response = Event.get_events(params)
 
 		respond_with response
