@@ -45,6 +45,7 @@ Rails.application.routes.draw do
   get 'get_event_dropdowns' => 'events#get_event_dropdowns'
 
   get 'create_event' => 'events#create_event'
+  get 'create_event_comment' => 'events#create_event_comment'
 
   root :to => 'users#welcome'
 

@@ -109,6 +109,23 @@ collegeEvent.controller 'EventsNewEditController', ['$scope', '$http', 'EventsSe
           window.location = '/'
       )
 
+    createEventComment: (event) ->
+      if this.newComment && this.newComment.length > 0 && this.event_id && this.event_id > 0
+        EventsService.createEventComment.query({ event_id: event.event_id, comment_text: this.newComment }, (responseData) ->
+          if responseData.errors == false
+            $scope.requestControl.events[$scope.requestControl.scopedEventIndex].comments = responseData.comments
+
+            $scope.requestControl.scopedEventIndex = null      
+        )
+
+    eventKeypress: ($event, eventIndex) ->
+      # If the key pressed was enter
+      if $event.charCode == this.returnKeyValue
+        this.scopedEventIndex = eventIndex
+
+        this.createEventComment($scope.requestControl.events[this.scopedEventIndex])
+
+
     getActiveOrganizations: ->
       EventsService.getActiveOrganizations.query({}, (responseData) ->
         if responseData.errors == false

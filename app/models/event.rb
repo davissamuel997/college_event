@@ -75,6 +75,33 @@ class Event < ActiveRecord::Base
     data
   end
 
+  def self.create_event_comment(options = {})
+    data = {:errors => false}
+
+    if options[:post_id].present? && options[:post_id].to_i > 0 && options[:comment_text].present? && options[:comment_text].size > 0 && options[:user_id].present? && options[:user_id].to_i > 0
+      post = Post.find(options[:post_id])
+
+      new_comment = post.comments.new(user_id: options[:user_id], text: options[:comment_text])
+
+      if new_comment.save
+        data[:comments] = post.comments.order('created_at ASC').map{ |comment| {
+            comment_id: comment.id,
+            user:       comment.get_user,
+            text:       comment.text,
+            post_date:  comment.post_date,
+            post_time:  comment.get_post_time
+          } 
+        }
+      else
+        data[:errors] = true
+      end
+    else
+      data[:errors] = true
+    end
+
+    data
+  end
+
 	def get_params
 		{
 			event_id:          id,
@@ -96,7 +123,15 @@ class Event < ActiveRecord::Base
       latitude:          latitude,
       longitude:         longitude,
       organization_id:   organization_id,
-      organization_name: organization.try(:name)
+      organization_name: organization.try(:name),
+      comments:          self.comments.order('created_at ASC').map{ |comment| {
+          comment_id: comment.id,
+          user:       comment.get_user,
+          text:       comment.text,
+          post_date:  comment.post_date,
+          post_time:  comment.get_post_time
+        } 
+      }
 		}
 	end
 
