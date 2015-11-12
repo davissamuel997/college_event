@@ -1,6 +1,7 @@
 class EventType < ActiveRecord::Base
 
 	belongs_to :university
+	has_many :events
 
 	def get_params
 		{

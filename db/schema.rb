@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151112163840) do
+ActiveRecord::Schema.define(version: 20151112174055) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,16 @@ ActiveRecord::Schema.define(version: 20151112163840) do
   add_index "comments", ["commentable_id"], name: "index_comments_on_commentable_id", using: :btree
   add_index "comments", ["commentable_type"], name: "index_comments_on_commentable_type", using: :btree
   add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
+
+  create_table "event_statuses", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "university_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "event_statuses", ["university_id"], name: "index_event_statuses_on_university_id", using: :btree
 
   create_table "event_types", force: :cascade do |t|
     t.string   "name"
@@ -54,21 +64,13 @@ ActiveRecord::Schema.define(version: 20151112163840) do
     t.datetime "updated_at"
     t.integer  "organization_id"
     t.integer  "event_type_id"
+    t.integer  "event_status_id"
   end
 
+  add_index "events", ["event_status_id"], name: "index_events_on_event_status_id", using: :btree
   add_index "events", ["event_type_id"], name: "index_events_on_event_type_id", using: :btree
   add_index "events", ["organization_id"], name: "index_events_on_organization_id", using: :btree
   add_index "events", ["university_id"], name: "index_events_on_university_id", using: :btree
-
-  create_table "organization_types", force: :cascade do |t|
-    t.string   "name"
-    t.text     "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "university_id"
-  end
-
-  add_index "organization_types", ["university_id"], name: "index_organization_types_on_university_id", using: :btree
 
   create_table "organization_users", force: :cascade do |t|
     t.integer  "user_id"

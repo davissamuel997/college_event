@@ -1,6 +1,8 @@
 class Event < ActiveRecord::Base
 
 	belongs_to :university
+	belongs_to :event_status
+	belongs_to :event_type
 
   has_many :comments, as: :commentable
   has_many :likes, as: :likeable
