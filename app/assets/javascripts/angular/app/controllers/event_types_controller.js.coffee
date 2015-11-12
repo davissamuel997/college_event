@@ -1,4 +1,4 @@
-collegeEvent.controller 'EventTypesController', ['$scope', '$http', 'OrganizationTypesService', '$location', '$pusher', '$sce', ($scope, $http, OrganizationTypesService, $location, $pusher, $sce) ->
+collegeEvent.controller 'EventTypesController', ['$scope', '$http', 'EventTypesService', '$location', '$pusher', '$sce', ($scope, $http, EventTypesService, $location, $pusher, $sce) ->
 
 ################################################################
 ############## Initial Page Load / Reset #######################
@@ -26,7 +26,7 @@ collegeEvent.controller 'EventTypesController', ['$scope', '$http', 'Organizatio
     event_types: []
 
     getEventTypes: ->
-      OrganizationTypesService.getEventTypes.query({}, (responseData) ->
+      EventTypesService.getEventTypes.query({}, (responseData) ->
         if responseData.errors == false
           $scope.requestControl.event_types = responseData.event_types
       )

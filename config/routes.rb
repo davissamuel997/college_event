@@ -27,10 +27,16 @@ Rails.application.routes.draw do
 
   resources :universities
 
+  resources :events
+
+  resources :event_types
+
   get 'get_universities' => 'universities#get_universities'
   get 'get_organizations' => 'organizations#get_organizations'
   get 'get_organization_types' => 'organization_types#get_organization_types'
   get 'get_organization' => 'organizations#get_organization'
+
+  get 'get_event_types' => 'event_types#get_event_types'
 
   root :to => 'users#welcome'
 
