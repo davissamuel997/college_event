@@ -3,8 +3,9 @@
   .content-wrapper
     %h3
       RSOs
-      .pull-right
-        %a.btn.btn-sm.btn-info{:href => "/organizations/new"} New RSO
+      - if current_user.present? && current_user.has_role?(:student)
+        .pull-right
+          %a.btn.btn-sm.btn-info{:href => "/organizations/new"} New RSO
     .row
       / START dashboard main content
       %section.col-md-12
@@ -58,7 +59,11 @@
                                   %a.btn{ 'ng-show' => '$last && requestControl.current_page!=page', 'ng-click' => "requestControl.changePage(page)" } &gt;&gt;
 
                       %div{'ng-if' => 'requestControl.organizations.length === 0 && loaderControl.isLoading === false'}
-                        %h4 Currently, there are organizations.
+                        - if current_user.present? && current_user.has_role?(:student)
+                          %a{:href => "/organizations/new"}
+                            %h4 Currently, there are no organizations
+                        - else
+                          %h4 Currently, there are no organizations.
 
                       %div{'ng-if' => 'loaderControl.isLoading === true'}
                         .loader-css

@@ -38,6 +38,8 @@ Rails.application.routes.draw do
 
   get 'get_event_types' => 'event_types#get_event_types'
 
+  get 'get_events' => 'events#get_events'
+
   root :to => 'users#welcome'
 
 end
