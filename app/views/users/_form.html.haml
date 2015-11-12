@@ -13,8 +13,6 @@
                     %strong.pull-right.make-red * Required
                 .control-group
                   %p
-                    = f.input :university_id, :as => :hidden, :input_html => { :value => @university_id }
-                  %p
                     = f.input :first_name, :label => "First Name", :input_html => { :class => 'form-control input-sm' }
 
                   %p
@@ -22,6 +20,9 @@
 
                   %p
                     = f.input :email, :label => "Email", :input_html => { :class => 'form-control input-sm' }
+
+                  %p
+                    = f.association :university, value_method: :id, label_method: :name, :label => "University", input_html: { :class => 'form-control input-sm chosen-select' }
 
                   %p
                     %label

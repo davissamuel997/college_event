@@ -10,15 +10,7 @@ class University < ActiveRecord::Base
 
   validates_presence_of :name
 
-  belongs_to :user
-
-  after_create :set_university_id
-
-  def set_university_id
-  	if user.present? && user.is_a?(User)
-  		user.update(university_id: id)
-  	end
-  end
+  has_many :users
 
 	def get_params
 		{
@@ -26,8 +18,18 @@ class University < ActiveRecord::Base
 			name:           name,
 			description:    description,
 			user_id:        user_id,
-			user_full_name: user.try(:full_name)          
+			user_full_name: get_user.try(:full_name)      
 		}
+	end
+
+	def get_user
+		if user_id && user_id > 0
+			user = User.find(user_id)
+		else
+			user = nil
+		end
+
+		user
 	end
 
 	def self.get_universities(options = {})

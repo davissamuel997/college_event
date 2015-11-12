@@ -22,6 +22,8 @@ class UniversitiesController < ApplicationController
 
 		@university.user_id = current_user.try(:id)
 
+		@university.users << current_user
+
 		if @university.save
 			redirect_to universities_path
 		else
