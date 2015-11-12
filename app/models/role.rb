@@ -7,4 +7,17 @@ class Role < ActiveRecord::Base
             :allow_nil => true
 
   scopify
+
+  def self.get_assignable_roles
+    Role.all
+  end
+
+  def get_params
+  	{
+  		role_id:       id,
+  		name:          name,
+  		resource_id:   resource_id,
+  		resource_type: resource_type
+  	}
+  end
 end

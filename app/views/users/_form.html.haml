@@ -1,0 +1,37 @@
+.row
+  .content
+    .col-md-12
+      .panel
+        .panel-body
+          .viewcode-example
+            = simple_form_for @user do |f|
+              %fieldset
+                %legend.section
+                  %h5
+                    %i.icon-note
+                    %strong General
+                    %strong.pull-right.make-red * Required
+                .control-group
+                  %p
+                    = f.input :university_id, :as => :hidden, :input_html => { :value => @university_id }
+                  %p
+                    = f.input :first_name, :label => "First Name", :input_html => { :class => 'form-control input-sm' }
+
+                  %p
+                    = f.input :last_name, :label => "Last Name", :input_html => { :class => 'form-control input-sm' }
+
+                  %p
+                    = f.input :email, :label => "Email", :input_html => { :class => 'form-control input-sm' }
+
+                  %p
+                    %label
+                      Select Role
+                      = f.association :roles, as: :select, label: false, collection: Role.get_assignable_roles, input_html: { :class => 'form-control input-sm chosen-select', multiple: false, prompt: true}
+
+
+              .form-actions
+                %p
+                  .btn-group.no-margin{style: "float: right;"}
+                    = link_to "Cancel", organization_types_path, :class => "btn btn-sm btn-default"
+
+                    = f.submit "Save RSO Type", :class => "btn btn-sm btn-success"
