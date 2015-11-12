@@ -1,10 +1,10 @@
-collegeEvent.controller 'OrganizationTypesController', ['$scope', '$http', 'OrganizationTypesService', '$location', '$pusher', '$sce', ($scope, $http, OrganizationTypesService, $location, $pusher, $sce) ->
+collegeEvent.controller 'EventStatusesController', ['$scope', '$http', 'EventStatusesService', '$location', '$pusher', '$sce', ($scope, $http, EventStatusesService, $location, $pusher, $sce) ->
 
 ################################################################
 ############## Initial Page Load / Reset #######################
 
   init = ->
-    $scope.requestControl.getOrganizationTypes()
+    $scope.requestControl.getEventStatuses()
 
 ################################################################
 ############## Other Initializers ##############################
@@ -23,12 +23,12 @@ collegeEvent.controller 'OrganizationTypesController', ['$scope', '$http', 'Orga
 
   $scope.requestControl = {
 
-    organization_types: []
+    event_statuses: []
 
-    getOrganizationTypes: ->
-      OrganizationTypesService.getOrganizationTypes.query({}, (responseData) ->
+    getEventStatuses: ->
+      EventStatusesService.getEventStatuses.query({}, (responseData) ->
         if responseData.errors == false
-          $scope.requestControl.organization_types = responseData.organization_types
+          $scope.requestControl.event_statuses = responseData.event_statuses
       )
 
   }

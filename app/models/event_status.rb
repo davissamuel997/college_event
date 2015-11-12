@@ -13,15 +13,15 @@ class EventStatus < ActiveRecord::Base
   	}
   end
 
-	def self.get_organization_types(options = {})
+	def self.get_event_statuses(options = {})
 		data = {:errors => false}
 
     if options[:university_id].present? && options[:university_id].to_i > 0
-  		data[:organization_types] = OrganizationType.find_by_sql("
-  																									SELECT organization_types.* FROM organization_types
-                                                    WHERE university_id = #{options[:university_id]}
-  																									ORDER BY name ASC
-  																								 ").map { |organization_type| organization_type.get_params }
+  		data[:event_statuses] = OrganizationType.find_by_sql("
+          																									SELECT event_statuses.* FROM event_statuses
+                                                            WHERE university_id = #{options[:university_id]}
+          																									ORDER BY name ASC
+          																								 ").map { |event_status| event_status.get_params }
     else
       data[:errors] = true
     end
