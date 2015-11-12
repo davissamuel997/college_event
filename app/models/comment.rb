@@ -38,7 +38,8 @@ class Comment < ActiveRecord::Base
       user:       get_user,
       text:       text,
       post_date:  post_date,
-      post_time:  get_post_time
+      post_time:  get_post_time,
+      rating:     rating
     }
   end
 

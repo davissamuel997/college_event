@@ -81,7 +81,8 @@ class Event < ActiveRecord::Base
     if options[:event_id].present? && options[:event_id].to_i > 0 && options[:comment_text].present? && options[:comment_text].size > 0 && options[:user_id].present? && options[:user_id].to_i > 0
       event = Event.find(options[:event_id])
 
-      new_comment = event.comments.new(user_id: options[:user_id], text: options[:comment_text])
+      new_comment = event.comments.new(user_id: options[:user_id], text: options[:comment_text],
+                                       rating:  options[:rating])
 
       if new_comment.save
         data[:comments] = event.comments.order('created_at ASC').map{ |comment| comment.get_params }
@@ -117,14 +118,7 @@ class Event < ActiveRecord::Base
       longitude:         longitude,
       organization_id:   organization_id,
       organization_name: organization.try(:name),
-      comments:          self.comments.order('created_at ASC').map{ |comment| {
-          comment_id: comment.id,
-          user:       comment.get_user,
-          text:       comment.text,
-          post_date:  comment.post_date,
-          post_time:  comment.get_post_time
-        } 
-      }
+      comments:          self.comments.order('created_at ASC').map{ |comment| comment.get_params } 
 		}
 	end
 
