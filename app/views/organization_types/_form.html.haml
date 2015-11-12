@@ -13,6 +13,8 @@
                     %strong.pull-right.make-red * Required
                 .control-group
                   %p
+                    = f.input :university_id, :as => :hidden, :input_html => { :value => @university_id }
+                  %p
                     = f.input :name, :label => "Name", :input_html => { :class => 'form-control input-sm' }
 
                   %p

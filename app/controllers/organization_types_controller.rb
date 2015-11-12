@@ -13,6 +13,8 @@ class OrganizationTypesController < ApplicationController
 
 	def new
 		@organization_type = OrganizationType.new
+
+		@university_id = current_user.university_id
 	end
 
 	def create
@@ -44,13 +46,15 @@ class OrganizationTypesController < ApplicationController
 
 	# /get_organizations
 	def get_organization_types
+		params[:university_id] = current_user.try(:university_id)
+
 		response = OrganizationType.get_organization_types(params)
 
 		respond_with response
 	end
 
   def organization_type_params
-    params.require(:organization_type).permit(:name)
+    params.require(:organization_type).permit(:name, :description, :university_id)
   end
 
   def set_organization_type

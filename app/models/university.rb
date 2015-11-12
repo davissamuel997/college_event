@@ -6,6 +6,8 @@ class University < ActiveRecord::Base
 
 	has_many :event_types
 
+	has_many :organization_types
+
   validates_presence_of :name
 
   belongs_to :user
