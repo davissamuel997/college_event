@@ -2,6 +2,9 @@ class Event < ActiveRecord::Base
 
 	belongs_to :university
 
+  has_many :comments, as: :commentable
+  has_many :likes, as: :likeable
+
 	def get_params
 		{
 			event_id:      id,
