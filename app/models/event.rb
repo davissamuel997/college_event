@@ -14,7 +14,9 @@ class Event < ActiveRecord::Base
   	user = options[:current_user]
 
   	if user.present? && user.is_a?(User)
-  		data[:events] = []
+      organization_ids = user.organizations.map(&:id)
+
+  		data[:events] = Event.where("university_id = ? OR organization_id IN (?)", user.university_id, organization_ids).order('date DESC')
   	else
   		data[:errors] = true
   	end
@@ -52,17 +54,49 @@ class Event < ActiveRecord::Base
     data
   end
 
+  def self.create_event(options = {}, need_parse = false)
+    data = {:errors => false}
+
+    if options[:event_params].present?
+      event_params = need_parse ? JSON.parse(options[:event_params]) : options[:event_params]
+
+      event = Event.new(event_params)
+
+      if event.save
+        data[:event_id] = event.id
+      else
+        data[:errors] = true
+      end
+    else
+      data[:errors] = true
+    end
+
+    data
+  end
+
 	def get_params
 		{
-			event_id:      id,
-			name:          name,
-			event_type_id: event_type_id,
-			description:   description,
-			start_time:    start_time,
-			date:          date.present? ? date.strftime('%Y-%m-%d') : nil,
-			contact_phone: contact_phone,
-			contact_email: contact_email,
-			university_id: university_id
+			event_id:          id,
+			name:              name,
+			event_type_id:     event_type_id,
+      event_type_name:   event_type.try(:name),
+      event_status_id:   event_status_id,
+      event_status_name: event_status.try(:name),
+			description:       description,
+			start_time:        start_time,
+			date:              date.present? ? date.strftime('%Y-%m-%d') : nil,
+			contact_phone:     contact_phone,
+			contact_email:     contact_email,
+			university_id:     university_id,
+      start_time:        start_time,
+      end_time:          end_time,
+      city:              city,
+      state:             state,
+      postal_code:       postal_code,
+      latitude:          latitude,
+      longitude:         longitude,
+      organization_id:   organization_id,
+      organization_name: organization.try(:name)
 		}
 	end
 

@@ -92,7 +92,18 @@
                     .row
                       .panel-heading
                         %h5
+                          %label.label-control City
+                          %input.form-control.input-sm{'ng-model' => 'requestControl.params.city', :placeholder => "Ex: Orlando"}
+
+                    .row
+                      .panel-heading
+                        %h5
                           %label.label-control State
                           %select.form-control{'ng-options' => 'state for state in requestControl.states', 'ng-model' => 'requestControl.params.state', :chosen => '', 'ng-disabled' => 'requestControl.states.length === 0'}
                             %option
+
+              .form-actions
+                .btn-input-group.pull-right
+                  %button.btn.btn-sm.btn-default{'ng-click' => 'requestControl.cancel()'} Cancel
+                  %button.btn.btn-sm.btn-success{'ng-click' => 'requestControl.createEvent()'} Save Event
 

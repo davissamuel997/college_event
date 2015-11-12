@@ -72,6 +72,8 @@ collegeEvent.controller 'EventsNewEditController', ['$scope', '$http', 'EventsSe
 
       address: null
 
+      city: null
+
       date: null
 
       description: null
@@ -97,6 +99,15 @@ collegeEvent.controller 'EventsNewEditController', ['$scope', '$http', 'EventsSe
     organizations: []
 
     states: []
+
+    cancel: ->
+      window.location = '/'
+
+    createEvent: ->
+      EventsService.createEvent.query({ event_params: this.params }, (responseData) ->
+        if responseData.errors == false
+          window.location = '/'
+      )
 
     getActiveOrganizations: ->
       EventsService.getActiveOrganizations.query({}, (responseData) ->
