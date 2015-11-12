@@ -35,6 +35,7 @@ Rails.application.routes.draw do
   get 'get_organizations' => 'organizations#get_organizations'
   get 'get_organization_types' => 'organization_types#get_organization_types'
   get 'get_organization' => 'organizations#get_organization'
+  get 'join_organization' => 'organizations#join_organization'
 
   get 'get_event_types' => 'event_types#get_event_types'
 

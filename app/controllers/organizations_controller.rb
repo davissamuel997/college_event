@@ -45,6 +45,8 @@ class OrganizationsController < ApplicationController
 
 	# /get_organizations
 	def get_organizations
+		params[:current_user] = current_user
+
 		response = Organization.get_organizations(params)
 
 		respond_with response
@@ -58,8 +60,14 @@ class OrganizationsController < ApplicationController
 		respond_with response
 	end
 
+	def join_organization
+		response = Organization.join_organization(params)
+
+		respond_with response
+	end
+
   def organization_params
-    params.require(:organization).permit(:name, :organization_type_id, :description, :university_id, :admin_id)
+    params.require(:organization).permit(:name, :organization_type_id, :description, :university_id, :admin_id, :is_active)
   end
 
   def set_organization

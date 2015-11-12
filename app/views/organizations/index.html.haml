@@ -1,5 +1,8 @@
 %section{'ng-controller' => "OrganizationsController"}
   / START Page content
+
+  = hidden_field_tag :user_id, current_user.id
+
   .content-wrapper
     %h3
       RSOs
@@ -62,8 +65,9 @@
                                   {{organization.is_active}}
                               %td.text-center{:style => "width: 25%;"}
                                 .btn-group
-                                  %a.btn.btn-xs.btn-success{'ng-href' => "/organizations/{{organization.organization_id}}"} Details
-                                  %a.btn.btn-xs.btn-warning{'ng-href' => "/organizations/{{organization.organization_id}}/edit"} Edit
+                                  %a.btn.btn-xs.btn-info{'ng-href' => "/organizations/{{organization.organization_id}}"} Details
+                                  %a.btn.btn-xs.btn-success{:href => '', 'ng-if' => 'organization.user_is_member === false', 'ng-click' => 'requestControl.joinOrganization(organization.organization_id, $index)'} Join
+                                  %a.btn.btn-xs.btn-warning{'ng-href' => "/organizations/{{organization.organization_id}}/edit", 'ng-if' => "organization.admin_id === requestControl.current_user_id"} Edit
 
                         .span
                           .pull-right

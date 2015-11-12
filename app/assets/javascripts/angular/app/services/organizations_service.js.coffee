@@ -2,4 +2,5 @@ collegeEvent.factory 'OrganizationsService', ['$resource', '$q', '$http', ($reso
 
   getOrganizations: $resource "/get_organizations.json", {}, query: { method: 'GET', isArray: false }
 
+  joinOrganization: $resource "/join_organization.json", {}, query: { method: 'GET', isArray: false }
 ]

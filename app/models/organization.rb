@@ -24,14 +24,14 @@ class Organization < ActiveRecord::Base
 
 			self.save
 		end
-	end	
+	end
 
 	def get_params(current_user = nil)
 		{
 			organization_id:      id,
 			admin_id:             admin_id,
 			admin_name:           get_admin_name,
-			current_user_member:  users.include?(current_user),
+			user_is_member:       users.include?(current_user),
 			user_count:           users.count,
 			name:                 name,
 			university_id:        university_id,
@@ -72,6 +72,28 @@ class Organization < ActiveRecord::Base
 			organization = Organization.find(options[:organization_id])
 
 			data[:organization] = organization.get_params
+		else
+			data[:errors] = true
+		end
+
+		data
+	end
+
+	def self.join_organization(options = {})
+		data = {:errors => false}
+
+		if options[:user_id].present? && options[:user_id].to_i > 0 && options[:organization_id].present? && options[:organization_id].to_i > 0
+			organization = Organization.find(options[:organization_id])
+
+			user = User.find(options[:user_id])
+
+			organization.users << user
+
+			if organization.save
+				data[:organization] = organization.get_params
+			else
+				data[:errors] = true
+			end
 		else
 			data[:errors] = true
 		end
