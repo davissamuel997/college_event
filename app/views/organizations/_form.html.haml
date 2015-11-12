@@ -10,7 +10,6 @@
                   %h5
                     %i.icon-note
                     %strong General
-                    %strong.pull-right.make-red * Required
                 .control-group
                   %p
                     = f.input :admin_id, :as => :hidden, :input_html => { :value => @organization.admin_id }
@@ -21,9 +20,6 @@
 
                   %p
                     = f.association :university, :label => "University", :label_method => :name, :value_method => :id, :input_html => { :class => 'form-control input-sm chosen-select' }
-
-                  %p
-                    = f.association :organization_type, :label => "RSO Type", :label_method => :name, :value_method => :id, :input_html => { :class => 'form-control input-sm chosen-select' }
 
                   %p
                     = f.input :description, :label => "Description", :as => :text, :input_html => { :class => 'form-control input-sm', :rows => 5}
