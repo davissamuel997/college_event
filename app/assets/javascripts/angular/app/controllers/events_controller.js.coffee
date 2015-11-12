@@ -26,7 +26,7 @@ collegeEvent.controller 'EventsController', ['$scope', '$http', 'EventsService',
     events: []
 
     getEvents: ->
-      EventTypesService.getEvents.query({}, (responseData) ->
+      EventsService.getEvents.query({}, (responseData) ->
         if responseData.errors == false
           $scope.requestControl.events = responseData.events
       )

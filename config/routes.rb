@@ -23,7 +23,7 @@ Rails.application.routes.draw do
 
   resources :organizations
 
-  resources :organization_types
+  resources :event_statuses
 
   resources :universities
 
@@ -33,10 +33,10 @@ Rails.application.routes.draw do
 
   get 'get_universities' => 'universities#get_universities'
   get 'get_organizations' => 'organizations#get_organizations'
-  get 'get_organization_types' => 'organization_types#get_organization_types'
   get 'get_organization' => 'organizations#get_organization'
   get 'join_organization' => 'organizations#join_organization'
 
+  get 'get_event_statuses' => 'event_statuses#get_event_statuses'
   get 'get_event_types' => 'event_types#get_event_types'
 
   get 'get_events' => 'events#get_events'

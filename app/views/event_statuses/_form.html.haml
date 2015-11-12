@@ -4,7 +4,7 @@
       .panel
         .panel-body
           .viewcode-example
-            = simple_form_for @organization_type do |f|
+            = simple_form_for @event_status do |f|
               %fieldset
                 %legend.section
                   %h5
@@ -23,6 +23,6 @@
               .form-actions
                 %p
                   .btn-group.no-margin{style: "float: right;"}
-                    = link_to "Cancel", organization_types_path, :class => "btn btn-sm btn-default"
+                    = link_to "Cancel", event_statuses_path, :class => "btn btn-sm btn-default"
 
-                    = f.submit "Save RSO Type", :class => "btn btn-sm btn-success"
+                    = f.submit "Save Event Status", :class => "btn btn-sm btn-success"

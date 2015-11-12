@@ -222,6 +222,10 @@
                 %span.item-text Dashboard
             - if current_user.present? && current_user.has_role?(:super_admin)
               %li
+                %a.no-submenu{"data-toggle" => "", :href => "/event_statuses", :title => "Event Status"}
+                  %em.fa.fa-file-text-o
+                  %span.item-text Event Statuses
+              %li
                 %a.no-submenu{"data-toggle" => "", :href => "/event_types", :title => "Event Type"}
                   %em.fa.fa-file-text-o
                   %span.item-text Event Types
@@ -233,11 +237,6 @@
               %a.no-submenu{"data-toggle" => "", :href => "/organizations", :title => "RSOs"}
                 %em.fa.fa-file-text-o
                 %span.item-text RSOs
-            - if current_user.present? && current_user.has_role?(:super_admin)
-              %li
-                %a.no-submenu{"data-toggle" => "", :href => "/organization_types", :title => "Organization Type"}
-                  %em.fa.fa-file-text-o
-                  %span.item-text RSO Types
             %li
               %a.no-submenu{"data-toggle" => "", :href => "/universities", :title => "Universities"}
                 %em.fa.fa-file-text-o

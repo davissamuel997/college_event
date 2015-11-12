@@ -6,10 +6,10 @@ class EventStatus < ActiveRecord::Base
 
   def get_params
   	{
-  		organization_type_id: id,
-  		name:                 name,
-  		description:          description,
-  		university_id:        university_id
+  		event_status_id: id,
+  		name:            name,
+  		description:     description,
+  		university_id:   university_id
   	}
   end
 
@@ -17,7 +17,7 @@ class EventStatus < ActiveRecord::Base
 		data = {:errors => false}
 
     if options[:university_id].present? && options[:university_id].to_i > 0
-  		data[:event_statuses] = OrganizationType.find_by_sql("
+  		data[:event_statuses] = EventStatus.find_by_sql("
           																									SELECT event_statuses.* FROM event_statuses
                                                             WHERE university_id = #{options[:university_id]}
           																									ORDER BY name ASC

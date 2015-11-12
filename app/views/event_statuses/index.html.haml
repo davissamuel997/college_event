@@ -1,10 +1,10 @@
-%section{'ng-controller' => "OrganizationTypesController"}
+%section{'ng-controller' => "EventStatusesController"}
   / START Page content
   .content-wrapper
     %h3
-      RSO Types
+      Event Statuses
       .pull-right
-        %a.btn.btn-sm.btn-info{:href => "/organization_types/new"} New RSO Type
+        %a.btn.btn-sm.btn-info{:href => "/event_statuses/new"} New Event Status
     .row
       / START dashboard main content
       %section.col-md-12
@@ -16,7 +16,7 @@
                 .panel-body
                   .viewcode-example
                     .table-responsive
-                      %div{'ng-if' => 'requestControl.organization_types.length > 0 && loaderControl.isLoading === false'}
+                      %div{'ng-if' => 'requestControl.event_statuses.length > 0 && loaderControl.isLoading === false'}
                         %table.table.table-striped.table-bordered.table-hover
                           %thead
                             %tr
@@ -27,15 +27,15 @@
                               %th{:bgcolor => "#464368", :style => "color: #FFF; text-align: center;"}
 
                           %tbody
-                            %tr{'ng-repeat' => 'organization_type in requestControl.organization_types'}
+                            %tr{'ng-repeat' => 'event_status in requestControl.event_statuses'}
                               %td.text-center
                                 %button.btn.btn-link.make-black
-                                  {{organization_type.name}}
+                                  {{event_status.name}}
                               %td.text-center
                                 %button.btn.btn-link.make-black
-                                  {{organization_type.description}}
+                                  {{event_status.description}}
                               %td.text-center
-                                %a.btn.btn-xs.btn-warning{'ng-href' => "/organization_types/{{organization_type.organization_type_id}}/edit"} Edit
+                                %a.btn.btn-xs.btn-warning{'ng-href' => "/event_statuses/{{event_status.event_status_id}}/edit"} Edit
 
                         .span
                           .pull-right
@@ -50,15 +50,15 @@
                                     {{ page }}
                                   %a.btn{ 'ng-show' => '$last && requestControl.current_page!=page', 'ng-click' => "requestControl.changePage(page)" } &gt;&gt;
 
-                      %div{'ng-if' => 'requestControl.organization_types.length === 0 && loaderControl.isLoading === false'}
-                        %h4 Currently, there are organization types.
+                      %div{'ng-if' => 'requestControl.event_statuses.length === 0 && loaderControl.isLoading === false'}
+                        %h4 Currently, there are event statuses.
 
                       %div{'ng-if' => 'loaderControl.isLoading === true'}
                         .loader-css
                           .load-container.load8
                             .loader
                               Loading...
-                          %h5 Fetching Organization Types...
+                          %h5 Fetching Event Statuses...
 
                     %a.btn-view-code{:href => "javascript:;", :style => "display: none;"}
                       %i.fa.fa-code

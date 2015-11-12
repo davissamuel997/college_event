@@ -57,7 +57,7 @@ class EventStatusesController < ApplicationController
     params.require(:event_status).permit(:name, :description, :university_id)
   end
 
-  def set_organization_type
+  def set_event_status
 		@event_status = EventStatus.find(params[:id])
   end
 
