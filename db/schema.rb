@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151112140233) do
+ActiveRecord::Schema.define(version: 20151112141637) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20151112140233) do
     t.integer  "university_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "description"
   end
 
   add_index "event_types", ["university_id"], name: "index_event_types_on_university_id", using: :btree
@@ -88,7 +89,10 @@ ActiveRecord::Schema.define(version: 20151112140233) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
+
+  add_index "universities", ["user_id"], name: "index_universities_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -107,10 +111,12 @@ ActiveRecord::Schema.define(version: 20151112140233) do
     t.string   "last_name"
     t.string   "full_name"
     t.string   "phone_number"
+    t.integer  "university_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["university_id"], name: "index_users_on_university_id", using: :btree
 
   create_table "users_roles", id: false, force: :cascade do |t|
     t.integer "user_id"

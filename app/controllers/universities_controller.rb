@@ -20,6 +20,8 @@ class UniversitiesController < ApplicationController
 	def create
 		@university = University.new(university_params)
 
+		@university.user_id = current_user.try(:id)
+
 		if @university.save
 			redirect_to universities_path
 		else

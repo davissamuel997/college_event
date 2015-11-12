@@ -8,6 +8,16 @@ class University < ActiveRecord::Base
 
   validates_presence_of :name
 
+  belongs_to :user
+
+  after_create :set_university_id
+
+  def set_university_id
+  	if user.present? && user.is_a?(User)
+  		user.update(university_id: id)
+  	end
+  end
+
 	def get_params
 		{
 			university_id: id,
