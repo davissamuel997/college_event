@@ -50,6 +50,12 @@ class EventsController < ApplicationController
 		respond_with response
 	end
 
+	def get_event_dropdowns
+		response = Event.get_event_dropdowns(params)
+
+		respond_with response
+	end
+
   def event_params
     params.require(:event).permit(:name, :category_id, :start_time, :date, :contact_phone, :contact_email, :university_id, :event_type_id, :event_status_id)
   end

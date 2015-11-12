@@ -1,9 +1,135 @@
-.row
+.row{'ng-controller' => 'EventsNewEditController'}
   .content
     .col-md-12
       .panel
         .panel-body
           .viewcode-example
+            %form
+              %section.widget
+                %fieldset
+                  %legend.section
+                    %h5
+                      %i.icon-info-sign
+                      %strong General
+
+                  .col-sm-6
+                    .row
+                      .panel-heading
+                        %h5
+                          %label.label-control Organization
+                          %select.form-control{'ng-options' => 'organization.organization_id as organization.name for organization in requestControl.organizations', 'ng-model' => 'requestControl.params.organization_id', :chosen => '', 'ng-change' => 'requestControl.getEventDropdowns()'}
+                            %option
+
+                    .row
+                      .panel-heading
+                        %h5
+                          %label.label-control Event Status
+                          %select.form-control{'ng-options' => 'event_status.event_status_id as event_status.name for event_status in requestControl.eventStatuses', 'ng-model' => 'requestControl.params.event_status_id', :chosen => '', 'ng-disabled' => 'requestControl.eventStatuses.length === 0'}
+                            %option
+
+                    .row
+                      .panel-heading
+                        %h5
+                          %label.label-control Event Type
+                          %select.form-control{'ng-options' => 'event_type.event_type_id as event_type.name for event_type in requestControl.eventTypes', 'ng-model' => 'requestControl.params.event_type_id', :chosen => '', 'ng-disabled' => 'requestControl.eventTypes.length === 0'}
+                            %option
+
+                    .row
+                      .panel-heading
+                        %h5
+                          %label.label-control Whisper Recording
+                          %select.form-control{'ng-options' => 'option.id as option.friendly_name for option in settingsControl.whisperRecordings', 'ng-model' => 'settingsControl.params.whisper_recording_id', :chosen => ''}
+                            %option
+
+                    .row
+                      .panel-heading
+                        %h5
+                          %label.label-control Include ROI on Report?
+                          %br
+                          .input-group-btn
+                            %button.btn.btn-success.btn-sm{'ng-if' => 'settingsControl.params.include_roi === true', 'ng-click' => 'settingsControl.updateIncludeRoi(true)'} Yes
+                            %button.btn.btn-primary.btn-sm{'ng-if' => 'settingsControl.params.include_roi === false', 'ng-click' => 'settingsControl.updateIncludeRoi(true)'} Yes
+                            %button.btn.btn-primary.btn-sm{'ng-if' => 'settingsControl.params.include_roi === true', 'ng-click' => 'settingsControl.updateIncludeRoi(false)'} No
+                            %button.btn.btn-success.btn-sm{'ng-if' => 'settingsControl.params.include_roi === false', 'ng-click' => 'settingsControl.updateIncludeRoi(false)'} No
+
+                    .row
+                      .panel-heading
+                        %h5
+                          %label.label-control My Auto Cloud Campaign?
+                          %br
+                          .input-group-btn
+                            %button.btn.btn-success.btn-sm{'ng-if' => 'settingsControl.params.my_auto_cloud === true', 'ng-click' => 'settingsControl.updateMyAutoCloud(true)'} Yes
+                            %button.btn.btn-primary.btn-sm{'ng-if' => 'settingsControl.params.my_auto_cloud === false', 'ng-click' => 'settingsControl.updateMyAutoCloud(true)'} Yes
+                            %button.btn.btn-primary.btn-sm{'ng-if' => 'settingsControl.params.my_auto_cloud === true', 'ng-click' => 'settingsControl.updateMyAutoCloud(false)'} No
+                            %button.btn.btn-success.btn-sm{'ng-if' => 'settingsControl.params.my_auto_cloud === false', 'ng-click' => 'settingsControl.updateMyAutoCloud(false)'} No
+
+                  .col-sm-6
+                    .row
+                      .panel-heading
+                        %h5
+                          %label.label-control Communication Type
+                          %select.form-control{'ng-options' => 'option.id as option.type_name for option in settingsControl.communicationTypes', 'ng-model' => 'settingsControl.params.data_source', :chosen => ''}
+                            %option
+
+                    .row
+                      .panel-heading
+                        %h5
+                          %label.label-control.make-red Customers Removed From Queue After X Days (Expiration Days)
+                          %select.form-control{'ng-options' => 'option.value as option.value for option in settingsControl.expirationDays', 'ng-model' => 'settingsControl.params.customer_expiration_days', :chosen => '', 'data-placeholder' => 'Select a Number of Expiration Days'}
+                            %option
+
+                    .row
+                      .panel-heading
+                        %h5
+                          %label.label-control Maximum Daily Customers Added
+                          %input.form-control.input-sm{'ng-model' => 'settingsControl.params.max_daily_customers', :placeholder => 'Ex: 100'}
+
+                    .row
+                      .panel-heading
+                        %h5
+                          %label.label-control.make-red Max Attempts
+                          %input.form-control.input-sm{'ng-model' => 'settingsControl.params.max_attempts', :placeholder => 'Ex: 3'}
+
+              %br
+
+            .row.alert.alert-info{'ng-if' => 'settingsControl.displayInstruction2 === true'}
+              .col-md-12
+                .fa.fa-times.remove-voice-mail-message.pull-right{'ng-click' => 'settingsControl.setInstructionDisplay2(false)'}
+
+              %h5
+
+                Your campaign is NOT required to set "Recurring Days".
+
+            .row{'ng-if' => 'settingsControl.displayInstruction2 === false'}
+              %button.btn.btn-info.pull-right{'ng-click' => 'settingsControl.setInstructionDisplay2(true)'}
+                %i.fa.fa-question.fa-lg
+
+            %form
+              %section.widget
+                %fieldset
+                  %legend.section
+                    %h5
+                      %i.icon-info-sign
+                      %strong Recurring Days
+
+                  .col-sm-6
+                    .row
+                      .panel-heading
+                        %h5
+                          %label.label-control Recurring Type
+                          %select.form-control{'ng-options' => 'option.id as option.type for option in settingsControl.recurringTypes', 'ng-model' => 'settingsControl.params.recurring_type', :chosen => '', 'data-placeholder' => 'Select a Recurring Type'}
+                            %option
+
+                  .col-sm-6
+                    .row
+                      .panel-heading
+                        %h5
+                          %label.label-control Days
+                          %select.form-control{'ng-options' => 'option.day as option.day for option in settingsControl.recurringDaysOptions', 'ng-model' => 'settingsControl.params.recurring_days', :chosen => '', :multiple => '', 'data-placeholder' => 'Select Some Days'}
+                            %option
+
+
+
             = simple_form_for @event do |f|
               %fieldset
                 %legend.section
@@ -13,7 +139,7 @@
                     %strong.pull-right.make-red * Required
                 .control-group
                   %p
-                    = f.association :organization, value_method: :id, label_method: :name, :label => "Organization", input_html: { :class => 'form-control input-sm chosen-select' }
+                    = f.input :organization, :collection => Organization.where(is_active: true).order('name ASC'), value_method: :id, label_method: :name, :label => "Organization", input_html: { :class => 'form-control input-sm chosen-select' }
                   %p
                     = f.association :event_status, value_method: :id, label_method: :name, :label => "Event Status", input_html: { :class => 'form-control input-sm chosen-select' }
                   %p

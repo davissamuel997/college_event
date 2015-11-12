@@ -22,6 +22,21 @@ class Event < ActiveRecord::Base
   	data
   end
 
+  def self.get_event_dropdowns(options = {})
+  	data = {:errors => false}
+
+  	if options[:organization_id].present? && options[:organization_id].to_i > 0
+  		organization = Organization.find(options[:organization_id])
+
+  		data[:event_statuses] = EventStatus.where(university_id: organization.university_id).order('name ASC').map{ |event_status| event_status.get_params }
+  		data[:event_types]    = EventType.where(university_id: organization.university_id).order('name ASC').map{ |event_type| event_type.get_params }
+  	else
+  		data[:errors] = true
+  	end
+
+  	data
+  end
+
   def self.get_countries(options = {})
     data = {:errors => false}
 

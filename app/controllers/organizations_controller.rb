@@ -66,6 +66,14 @@ class OrganizationsController < ApplicationController
 		respond_with response
 	end
 
+	def get_active_organizations
+		params[:user_id] = current_user.id
+
+		response = Organization.get_active_organizations(params)
+
+		respond_with response
+	end
+
   def organization_params
     params.require(:organization).permit(:name, :organization_type_id, :description, :university_id, :admin_id, :is_active)
   end

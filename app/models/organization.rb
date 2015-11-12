@@ -5,13 +5,11 @@ class Organization < ActiveRecord::Base
 
 	has_many :events
 
-	belongs_to :organization_type
 	belongs_to :university
 
   validates_presence_of :name
 	validates_uniqueness_of :name, scope: :university_id
 
-	validates_presence_of :organization_type_id
 	validates_presence_of :university_id
 
 	after_create :add_user_to_organization
@@ -36,8 +34,6 @@ class Organization < ActiveRecord::Base
 			name:                 name,
 			university_id:        university_id,
 			university_name:      university.try(:name),
-			organization_type_id: organization_type_id,
-			organization_type:    organization_type.try(:name),
 			description:          description,
 			is_active:            is_active,
 			events:               events.order('date DESC').map{ |event| event.get_params }
@@ -94,6 +90,20 @@ class Organization < ActiveRecord::Base
 			else
 				data[:errors] = true
 			end
+		else
+			data[:errors] = true
+		end
+
+		data
+	end
+
+	def self.get_active_organizations(options = {})
+		data = {:errors => false}
+
+		if options[:user_id].present? && options[:user_id].to_i > 0
+			user = User.find(options[:user_id])
+
+			data[:organizations] = user.organizations.where(is_active: true).order('name ASC').map{ |organization| organization.get_params }
 		else
 			data[:errors] = true
 		end

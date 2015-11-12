@@ -35,11 +35,13 @@ Rails.application.routes.draw do
   get 'get_organizations' => 'organizations#get_organizations'
   get 'get_organization' => 'organizations#get_organization'
   get 'join_organization' => 'organizations#join_organization'
+  get 'get_active_organizations' => 'organizations#get_active_organizations'
 
   get 'get_event_statuses' => 'event_statuses#get_event_statuses'
   get 'get_event_types' => 'event_types#get_event_types'
 
   get 'get_events' => 'events#get_events'
+  get 'get_event_dropdowns' => 'events#get_event_dropdowns'
 
   root :to => 'users#welcome'
 
