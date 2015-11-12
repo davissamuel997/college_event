@@ -94,7 +94,10 @@
 
                           %button.btn.btn-xs{'ng-if' => 'comment.rating !== 5', 'ng-click' => 'comment.rating = 5'} 5
                           %button.btn.btn-xs.btn-danger{'ng-if' => 'comment.rating === 5'} 5
+                          %a.btn-link.pull-right
+                            %i.fa.fa-angle-up
                         %br
+                        %p by {{comment.user.full_name}} on {{comment.post_date}}
                         %p.m0
                           %small
                             {{comment.text}}                       
