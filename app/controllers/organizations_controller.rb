@@ -12,6 +12,8 @@ class OrganizationsController < ApplicationController
 
 	def new
 		@organization = Organization.new
+
+		@organization.admin_id = current_user.try(:id)
 	end
 
 	def create
@@ -49,13 +51,15 @@ class OrganizationsController < ApplicationController
 	end
 
 	def get_organization
+		params[:current_user] = current_user
+
 		response = Organization.get_organization(params)
 
 		respond_with response
 	end
 
   def organization_params
-    params.require(:organization).permit(:name, :organization_type_id, :description, :university_id)
+    params.require(:organization).permit(:name, :organization_type_id, :description, :university_id, :admin_id)
   end
 
   def set_organization

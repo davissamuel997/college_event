@@ -21,13 +21,21 @@
                         %table.table.table-striped.table-bordered.table-hover
                           %thead
                             %tr
-                              %th.text-center
+                              %th{:bgcolor => "#464368", :style => "color: #FFF; text-align: center;"}
                                 %strong Name
-                              %th.text-center
+                              %th{:bgcolor => "#464368", :style => "color: #FFF; text-align: center;"}
+                                %strong University
+                              %th{:bgcolor => "#464368", :style => "color: #FFF; text-align: center;"}
                                 %strong RSO Type
-                              %th.text-center
+                              %th{:bgcolor => "#464368", :style => "color: #FFF; text-align: center;"}
                                 %strong Description
-                              %th.text-center
+                              %th{:bgcolor => "#464368", :style => "color: #FFF; text-align: center;"}
+                                %strong Admin
+                              %th{:bgcolor => "#464368", :style => "color: #FFF; text-align: center;"}
+                                %strong Members
+                              %th{:bgcolor => "#464368", :style => "color: #FFF; text-align: center;"}
+                                %strong Active?
+                              %th{:bgcolor => "#464368", :style => "color: #FFF; text-align: center; width: 25%;"}
 
                           %tbody
                             %tr{'ng-repeat' => 'organization in requestControl.organizations'}
@@ -36,11 +44,23 @@
                                   {{organization.name}}
                               %td.text-center
                                 %button.btn.btn-link.make-black
+                                  {{organization.university_name}}
+                              %td.text-center
+                                %button.btn.btn-link.make-black
                                   {{organization.organization_type}}
                               %td.text-center
                                 %button.btn.btn-link.make-black
                                   {{organization.description}}
                               %td.text-center
+                                %button.btn.btn-link.make-black
+                                  {{organization.admin_name}}
+                              %td.text-center
+                                %button.btn.btn-link.make-black
+                                  {{organization.user_count}}
+                              %td.text-center
+                                %button.btn.btn-link.make-black
+                                  {{organization.is_active}}
+                              %td.text-center{:style => "width: 25%;"}
                                 .btn-group
                                   %a.btn.btn-xs.btn-success{'ng-href' => "/organizations/{{organization.organization_id}}"} Details
                                   %a.btn.btn-xs.btn-warning{'ng-href' => "/organizations/{{organization.organization_id}}/edit"} Edit

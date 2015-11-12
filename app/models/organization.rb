@@ -14,15 +14,44 @@ class Organization < ActiveRecord::Base
 	validates_presence_of :organization_type_id
 	validates_presence_of :university_id
 
-	def get_params
+	after_create :add_user_to_organization
+
+	def add_user_to_organization
+		if admin_id && admin_id > 0
+			user = User.find(admin_id)
+
+			users << user
+
+			self.save
+		end
+	end	
+
+	def get_params(current_user = nil)
 		{
 			organization_id:      id,
+			admin_id:             admin_id,
+			admin_name:           get_admin_name,
+			current_user_member:  users.include?(current_user),
+			user_count:           users.count,
 			name:                 name,
+			university_id:        university_id,
+			university_name:      university.try(:name),
 			organization_type_id: organization_type_id,
 			organization_type:    organization_type.try(:name),
 			description:          description,
+			is_active:            is_active,
 			events:               events.order('date DESC').map{ |event| event.get_params }
 		}
+	end
+
+	def get_admin_name
+		if admin_id && admin_id > 0
+			admin_name = User.find(admin_id).try(:full_name)
+		else
+			admin_name = nil
+		end
+
+		admin_name
 	end
 
 	def self.get_organizations(options = {})
@@ -31,7 +60,7 @@ class Organization < ActiveRecord::Base
 		data[:organizations] = Organization.find_by_sql("
 																									SELECT organizations.* FROM organizations 
 																									ORDER BY name ASC
-																								 ").map { |organization| organization.get_params }
+																								 ").map { |organization| organization.get_params(options[:current_user]) }
 
 		data
 	end
