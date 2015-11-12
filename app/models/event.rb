@@ -15,8 +15,9 @@ class Event < ActiveRecord::Base
 
   	if user.present? && user.is_a?(User)
       organization_ids = user.organizations.map(&:id)
+      event_status_id = EventStatus.where(name: "Public").first.try(:id)
 
-  		data[:events] = Event.where("university_id = ? OR organization_id IN (?)", user.university_id, organization_ids).order('date DESC')
+  		data[:events] = Event.where("university_id = ? OR organization_id IN (?) OR event_status_id = ?", user.university_id, organization_ids, event_status_id).order('date DESC').map{ |event| event.get_params }
   	else
   		data[:errors] = true
   	end
@@ -88,7 +89,6 @@ class Event < ActiveRecord::Base
 			contact_phone:     contact_phone,
 			contact_email:     contact_email,
 			university_id:     university_id,
-      start_time:        start_time,
       end_time:          end_time,
       city:              city,
       state:             state,
