@@ -6,7 +6,7 @@ class OrganizationUser < ActiveRecord::Base
 	after_create :check_make_active
 
 	def check_make_active
-		if organization.present? && organization.is_a?(Organization) && organization.users.present? && organization.users.count >= 2
+		if organization.present? && organization.is_a?(Organization) && organization.users.present? && organization.users.count >= 6
 			organization.update(is_active: true)
 		end
 	end
