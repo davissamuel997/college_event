@@ -4,6 +4,8 @@ class University < ActiveRecord::Base
 
 	has_many :organizations
 
+	has_many :event_types
+
   validates_presence_of :name
 
 	def get_params

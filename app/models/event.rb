@@ -6,7 +6,7 @@ class Event < ActiveRecord::Base
 		{
 			event_id:      id,
 			name:          name,
-			category_id:   category_id,
+			event_type_id: event_type_id,
 			description:   description,
 			start_time:    start_time,
 			date:          date.present? ? date.strftime('%Y-%m-%d') : nil,
