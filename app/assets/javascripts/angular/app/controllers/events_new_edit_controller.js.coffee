@@ -9,6 +9,47 @@ collegeEvent.controller 'EventsNewEditController', ['$scope', '$http', 'EventsSe
 ################################################################
 ############## Other Initializers ##############################
 
+###########################################################
+################# Datepickers #############################
+
+  $scope.datepicker = {
+
+    dateOptions: {
+      formatYear: 'yy',
+      startingDay: 1,
+      showWeeks: false
+    };
+
+    format: 'dd-MMMM-yyyy';
+
+    minDate: new Date()
+
+    opened: false
+
+    clear: ->
+      $scope.requestControl.params.date = null
+    
+    # Disable weekend selection
+    disabled: (date, mode) ->
+      return ( mode == 'day' && ( date.getDay() == 0 || date.getDay() == 6 ) );
+
+    open: ($event) ->
+      $event.preventDefault();
+      $event.stopPropagation();
+
+      if $scope.requestControl.params.date == null
+        this.today()
+
+      $scope.datepicker.opened = true;
+
+    today: ->
+      $scope.requestControl.params.date = new Date();
+
+    toggleMin: ->
+      $scope.minDate = $scope.minDate ? null : new Date();
+
+  }
+
 ################################################################
 ################# Request Control ##############################
 
@@ -29,15 +70,33 @@ collegeEvent.controller 'EventsNewEditController', ['$scope', '$http', 'EventsSe
 
     params: {
 
+      address: null
+
+      date: null
+
+      description: null
+
+      end_time: null
+
       event_status_id: null
 
       event_type_id: null
 
+      name: null
+
       organization_id: null
+
+      postal_code: null
+
+      start_time: null
+
+      state: null
 
     }
 
     organizations: []
+
+    states: []
 
     getActiveOrganizations: ->
       EventsService.getActiveOrganizations.query({}, (responseData) ->
@@ -51,6 +110,7 @@ collegeEvent.controller 'EventsNewEditController', ['$scope', '$http', 'EventsSe
           if responseData.errors == false
             $scope.requestControl.eventStatuses = responseData.event_statuses
             $scope.requestControl.eventTypes    = responseData.event_types
+            $scope.requestControl.states        = responseData.states
         )
 
   }

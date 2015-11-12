@@ -30,6 +30,7 @@ class Event < ActiveRecord::Base
 
   		data[:event_statuses] = EventStatus.where(university_id: organization.university_id).order('name ASC').map{ |event_status| event_status.get_params }
   		data[:event_types]    = EventType.where(university_id: organization.university_id).order('name ASC').map{ |event_type| event_type.get_params }
+  		data[:states]         = Carmen::Country.coded('US').subregions.map{ |state| state.name } 
   	else
   		data[:errors] = true
   	end
