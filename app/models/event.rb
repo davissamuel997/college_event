@@ -105,7 +105,7 @@ class Event < ActiveRecord::Base
       event_status_id:   event_status_id,
       event_status_name: event_status.try(:name),
 			description:       description,
-			start_time:        start_time,
+			start_time:        start_time.present? ? start_time.strftime('%I:%M %p') : nil,
 			date:              date.present? ? date.strftime('%Y-%m-%d') : nil,
 			contact_phone:     contact_phone,
 			contact_email:     contact_email,

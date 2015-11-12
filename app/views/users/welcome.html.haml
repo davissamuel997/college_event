@@ -58,7 +58,7 @@
                               {{event.city}}
                           %td.text-center
                             %button.btn.btn-link.make-black
-                              {{event.description}}
+                              {{ event.description | limitTo: 20 }}{{event.description.length > 20 ? '...' : ''}}
                           %td.text-center
                             %a.btn.btn-xs.btn-success{'ng-href' => "/events/{{event.event_id}}"} Details
 
