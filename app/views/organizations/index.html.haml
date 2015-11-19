@@ -48,7 +48,7 @@
                                   {{organization.university_name}}
                               %td.text-center
                                 %button.btn.btn-link.make-black
-                                  {{organization.description}}
+                                {{ organization.description | limitTo: 20 }}{{organization.description.length > 20 ? '...' : ''}}
                               %td.text-center
                                 %button.btn.btn-link.make-black
                                   {{organization.admin_name}}
