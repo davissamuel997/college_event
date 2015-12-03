@@ -1,4 +1,7 @@
 %section{'ng-controller' => "EventsShowController"}
+  = hidden_field_tag :lat, @event.latitude, :id => "lat"
+  = hidden_field_tag :lng, @event.longitude, :id => "lng"
+
   .content-wrapper
     %h3
       Event Details
@@ -84,10 +87,10 @@
 
         %br
 
-        %span.col-md-12
+        .col-md-12
           #map{:style => "height: 400px;"}
 
-        %br
+      .panel-body
 
         %article.hentry.post
           %fieldset

@@ -4,14 +4,20 @@ collegeEvent.controller 'EventsShowController', ['$scope', '$http', 'Organizatio
 ############## Initial Page Load / Reset #######################
 
   init = ->
-  	$scope.requestControl.initMap()
+    setUpLatLng()
+
+    $scope.requestControl.initMap()
 
 ################################################################
 ############## Other Initializers ##############################
 
-  setUpCurrentUserId = ->
-    if $('#user_id') && $('#user_id').length > 0 && $('#user_id')[0].value && parseInt($('#user_id')[0].value, 10) > 0
-      $scope.requestControl.current_user_id = parseInt($('#user_id')[0].value, 10)
+  setUpLatLng = ->
+
+    if $('#lat') && $('#lat').length > 0 && $('#lat')[0].value
+      $scope.requestControl.lat = parseFloat($('#lat')[0].value, 10)
+
+    if $('#lng') && $('#lng').length > 0 && $('#lng')[0].value
+      $scope.requestControl.lng = parseFloat($('#lng')[0].value, 10)
 
 ################################################################
 ################# Request Control ##############################
@@ -27,12 +33,21 @@ collegeEvent.controller 'EventsShowController', ['$scope', '$http', 'Organizatio
 
   $scope.requestControl = {
 
+    lat: null
+
+    lng: null
+
     initMap: ->
       map = new (google.maps.Map)(document.getElementById('map'),
         center:
-          lat: 28.601923
-          lng: -81.2005395
-        zoom: 15)
+          lat: this.lat
+          lng: this.lng
+        zoom: 16)
+
+      marker = new (google.maps.Marker)(
+        position: { lat: this.lat, lng: this.lng }
+        map: map
+        title: 'Hello World!')
 
   }
 
