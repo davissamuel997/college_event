@@ -10,7 +10,7 @@
       / START dashboard main content
       %section.col-md-12
         / START chart
-        .row{'ng-repeat' => 'event in requestControl.events'}
+        .row{'ng-repeat' => 'event in requestControl.events', 'ng-if' => 'requestControl.events.length > 0'}
           .panel.panel-default
             .panel-heading
               .panel-title {{event.name}}
@@ -130,6 +130,13 @@
                   .form-actions
                     .pull-right
                       %button.btn.btn-xs.btn-success{'ng-click' => 'requestControl.createEventComment($index)'} Submit
+
+        .row{'ng-if' => 'requestControl.events.length === 0'}
+          %table.table
+            %tbody
+              %tr
+                %td
+                  %button.btn.btn-link There are currently no scheduled events that are avaiable to you.
 
     / .row
     /   / START dashboard main content
