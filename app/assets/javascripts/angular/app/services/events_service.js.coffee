@@ -6,6 +6,8 @@ collegeEvent.factory 'EventsService', ['$resource', '$q', '$http', ($resource, $
 
   getActiveOrganizations: $resource "/get_active_organizations.json", {}, query: { method: 'GET', isArray: false }
 
+  getEventComments: $resource "/get_event_comments.json", {}, query: { method: 'GET', isArray: false }
+
   getEventDropdowns: $resource "/get_event_dropdowns.json", {}, query: { method: 'GET', isArray: false }
 
   getEvents: $resource "/get_events.json", {}, query: { method: 'GET', isArray: false }

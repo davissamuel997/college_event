@@ -1,4 +1,4 @@
-collegeEvent.controller 'EventsShowController', ['$scope', '$http', 'OrganizationsService', '$location', '$pusher', '$sce', ($scope, $http, OrganizationsService, $location, $pusher, $sce) ->
+collegeEvent.controller 'EventsShowController', ['$scope', '$http', 'EventsService', '$location', '$pusher', '$sce', ($scope, $http, EventsService, $location, $pusher, $sce) ->
 
 ################################################################
 ############## Initial Page Load / Reset #######################
@@ -8,8 +8,16 @@ collegeEvent.controller 'EventsShowController', ['$scope', '$http', 'Organizatio
 
     $scope.requestControl.initMap()
 
+    setUpEventId()
+
+    $scope.requestControl.getEventComments()
+
 ################################################################
 ############## Other Initializers ##############################
+
+  setUpEventId = ->
+    if $('#event_id') && $('#event_id').length > 0 && $('#event_id')[0].value
+      $scope.requestControl.event_id = parseInt($('#event_id')[0].value, 10)
 
   setUpLatLng = ->
 
@@ -33,6 +41,10 @@ collegeEvent.controller 'EventsShowController', ['$scope', '$http', 'Organizatio
 
   $scope.requestControl = {
 
+    comments: []
+
+    event_id: null
+
     lat: null
 
     lng: null
@@ -48,6 +60,13 @@ collegeEvent.controller 'EventsShowController', ['$scope', '$http', 'Organizatio
         position: { lat: this.lat, lng: this.lng }
         map: map
         title: 'Hello World!')
+
+    getEventComments: ->
+      if this.event_id && this.event_id > 0
+        EventsService.getEventComments.query({ event_id: this.event_id }, (responseData) ->
+          if responseData.errors == false
+            $scope.requestControl.comments = responseData.comments
+        )
 
   }
 

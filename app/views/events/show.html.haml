@@ -1,6 +1,7 @@
 %section{'ng-controller' => "EventsShowController"}
   = hidden_field_tag :lat, @event.latitude, :id => "lat"
   = hidden_field_tag :lng, @event.longitude, :id => "lng"
+  = hidden_field_tag :event_id, @event.id, :id => "event_id"
 
   .content-wrapper
     %h3
@@ -115,6 +116,45 @@
             /       %p
             /         = c.text
 
+          .panel-footer.clearfix
+            .list-group
+              .list-group-item{'ng-repeat' => 'comment in requestControl.comments', 'ng-if' => 'requestControl.comments.length > 0'}
+                .media
+                  .pull-left
+                    %span.fa-stack.fa-lg
+                      %em.fa.fa-circle.fa-stack-2x.text-purple
+                      %em.fa.fa-cloud-upload.fa-stack-1x.fa-inverse.text-white
+                  .media-body.clearfix
+                    %p.m0
+                      %button.btn.btn-xs{'ng-if' => 'comment.rating !== 1'} 1
+                      %button.btn.btn-xs.btn-danger{'ng-if' => 'comment.rating === 1'} 1
+
+                      %button.btn.btn-xs{'ng-if' => 'comment.rating !== 2'} 2
+                      %button.btn.btn-xs.btn-danger{'ng-if' => 'comment.rating === 2'} 2
+
+                      %button.btn.btn-xs{'ng-if' => 'comment.rating !== 3'} 3
+                      %button.btn.btn-xs.btn-danger{'ng-if' => 'comment.rating === 3'} 3
+
+                      %button.btn.btn-xs{'ng-if' => 'comment.rating !== 4'} 4
+                      %button.btn.btn-xs.btn-danger{'ng-if' => 'comment.rating === 4'} 4
+
+                      %button.btn.btn-xs{'ng-if' => 'comment.rating !== 5'} 5
+                      %button.btn.btn-xs.btn-danger{'ng-if' => 'comment.rating === 5'} 5
+                      %a.btn.btn-link.pull-right{'ng-if' => 'comment.user_id === requestControl.currentUser.user_id', 'ng-click' => "requestControl.editComment(comment)"}
+                        %i.fa.fa-angle-up
+                    %br
+                    %p by {{comment.user.full_name}} on {{comment.post_date}}
+                    %p.m0
+                      %small
+                        {{comment.text}}                       
+                    / .media-heading.text-purple.m0 {{comment.text}}
+                    %small.text-muted.pull-right {{comment.post_time}}
+
+              .list-group-item{'ng-if' => 'requestControl.comments.length === 0'}
+                %strong
+                  There are currently no comments for this event.
+
+          %br
           .comment-des{:style => 'background-color: #f9f9f9;'}
             .arrow-comment
             %form
@@ -123,8 +163,7 @@
               %br
               .form-actions
                 %p
-                  / .btn-group.no-margin{style: "float: right;"}
-                  %button.btn.btn-sm.btn-success{'ng-click' => 'requestControl.postComment()'} Post Comment
+                  %button.btn.btn-sm.btn-success.pull-right{'ng-click' => 'requestControl.postComment()'} Post Comment
         
 
 

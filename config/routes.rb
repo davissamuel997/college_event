@@ -49,6 +49,8 @@ Rails.application.routes.draw do
 
   get 'update_comment' => 'comments#update_comment'
 
+  get 'get_event_comments' => 'events#get_event_comments'
+
   root :to => 'users#welcome'
 
 end

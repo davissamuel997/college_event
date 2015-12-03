@@ -42,6 +42,12 @@ class Event < ActiveRecord::Base
       rso_status_ids     = EventStatus.where(name: "RSO").map(&:id)
       public_status_ids  = EventStatus.where(name: "Public").map(&:id)
 
+      # SELECT "events".*
+      # FROM "events" 
+      # WHERE ((event_status_id IN (2) 
+      #   AND university_id = 6) OR (event_status_id IN (3) 
+      #   AND organization_id IN (5,6,7,12,13,14,15)) OR event_status_id IN (1))  
+      # ORDER BY date DESC
   		data[:events]       = Event.where("(event_status_id IN (?) AND university_id = ?) OR (event_status_id IN (?) AND organization_id IN (?)) OR event_status_id IN (?)", private_status_ids, user.university_id, rso_status_ids, organization_ids, public_status_ids).order('date DESC').map{ |event| event.get_params }
       data[:current_user] = user.get_params
   	else
@@ -49,6 +55,20 @@ class Event < ActiveRecord::Base
   	end
 
   	data
+  end
+
+  def self.get_event_comments(options = {})
+    data = {:errors => false}
+
+    if options[:event_id].present? && options[:event_id].to_i > 0
+      event = Event.find(options[:event_id])
+
+      data[:comments] = event.comments.order('created_at ASC').map{ |comment| comment.get_params }
+    else
+      data[:errors] = true
+    end
+
+    data
   end
 
   def self.get_event_dropdowns(options = {})
