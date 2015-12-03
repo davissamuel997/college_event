@@ -1,5 +1,8 @@
 class Event < ActiveRecord::Base
 
+  geocoded_by :full_street_address
+  after_validation :geocode
+
 	belongs_to :university
 	belongs_to :organization
 	belongs_to :event_status
