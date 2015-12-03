@@ -23,6 +23,8 @@ collegeEvent.controller 'EventsController', ['$scope', '$http', 'EventsService',
 
   $scope.requestControl = {
 
+    currentUser: null
+
     events: []
 
     newComment: null
@@ -48,7 +50,8 @@ collegeEvent.controller 'EventsController', ['$scope', '$http', 'EventsService',
     getEvents: ->
       EventsService.getEvents.query({}, (responseData) ->
         if responseData.errors == false
-          $scope.requestControl.events = responseData.events
+          $scope.requestControl.events      = responseData.events
+          $scope.requestControl.currentUser = responseData.current_user
       )
 
   }
