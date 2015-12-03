@@ -23,9 +23,13 @@ collegeEvent.controller 'EventsController', ['$scope', '$http', 'EventsService',
 
   $scope.requestControl = {
 
+    commentBeingEdited: null
+
     currentUser: null
 
     events: []
+
+    isEditingComment: false
 
     newComment: null
 
@@ -47,12 +51,21 @@ collegeEvent.controller 'EventsController', ['$scope', '$http', 'EventsService',
             $scope.requestControl.rating = null  
         )
 
+    editComment: (comment) ->
+      this.commentBeingEdited = comment
+
+      this.isEditingComment = true
+
     getEvents: ->
       EventsService.getEvents.query({}, (responseData) ->
         if responseData.errors == false
           $scope.requestControl.events      = responseData.events
           $scope.requestControl.currentUser = responseData.current_user
       )
+
+
+    updateEventComment: (commentIndex) ->
+      debugger
 
   }
 

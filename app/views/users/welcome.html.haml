@@ -73,28 +73,28 @@
               .panel-footer.clearfix
                 .list-group
                   .list-group-item{'ng-repeat' => 'comment in event.comments'}
-                    .media
+                    .media{'ng-if' => 'requestControl.isEditingComment === false || comment.comment_id !== requestControl.commentBeingEdited.comment_id'}
                       .pull-left
                         %span.fa-stack.fa-lg
                           %em.fa.fa-circle.fa-stack-2x.text-purple
                           %em.fa.fa-cloud-upload.fa-stack-1x.fa-inverse.text-white
                       .media-body.clearfix
                         %p.m0
-                          %button.btn.btn-xs{'ng-if' => 'comment.rating !== 1', 'ng-click' => 'comment.rating = 1'} 1
+                          %button.btn.btn-xs{'ng-if' => 'comment.rating !== 1'} 1
                           %button.btn.btn-xs.btn-danger{'ng-if' => 'comment.rating === 1'} 1
 
-                          %button.btn.btn-xs{'ng-if' => 'comment.rating !== 2', 'ng-click' => 'comment.rating = 2'} 2
+                          %button.btn.btn-xs{'ng-if' => 'comment.rating !== 2'} 2
                           %button.btn.btn-xs.btn-danger{'ng-if' => 'comment.rating === 2'} 2
 
-                          %button.btn.btn-xs{'ng-if' => 'comment.rating !== 3', 'ng-click' => 'comment.rating = 3'} 3
+                          %button.btn.btn-xs{'ng-if' => 'comment.rating !== 3'} 3
                           %button.btn.btn-xs.btn-danger{'ng-if' => 'comment.rating === 3'} 3
 
-                          %button.btn.btn-xs{'ng-if' => 'comment.rating !== 4', 'ng-click' => 'comment.rating = 4'} 4
+                          %button.btn.btn-xs{'ng-if' => 'comment.rating !== 4'} 4
                           %button.btn.btn-xs.btn-danger{'ng-if' => 'comment.rating === 4'} 4
 
-                          %button.btn.btn-xs{'ng-if' => 'comment.rating !== 5', 'ng-click' => 'comment.rating = 5'} 5
+                          %button.btn.btn-xs{'ng-if' => 'comment.rating !== 5'} 5
                           %button.btn.btn-xs.btn-danger{'ng-if' => 'comment.rating === 5'} 5
-                          %a.btn-link.pull-right{'ng-if' => 'comment.user_id === requestControl.currentUser.user_id'}
+                          %a.btn.btn-link.pull-right{'ng-if' => 'comment.user_id === requestControl.currentUser.user_id', 'ng-click' => "requestControl.editComment(comment)"}
                             %i.fa.fa-angle-up
                         %br
                         %p by {{comment.user.full_name}} on {{comment.post_date}}
@@ -103,6 +103,34 @@
                             {{comment.text}}                       
                         / .media-heading.text-purple.m0 {{comment.text}}
                         %small.text-muted.pull-right {{comment.post_time}}
+
+                    .media{'ng-if' => 'requestControl.isEditingComment === true && comment.comment_id === requestControl.commentBeingEdited.comment_id'}
+                      %form
+                        .form-group
+                          %p
+                            %label.label-control Rating
+                            %br
+                            %button.btn.btn-xs{'ng-if' => 'requestControl.commentBeingEdited.rating !== 1', 'ng-click' => 'requestControl.commentBeingEdited.rating = 1'} 1
+                            %button.btn.btn-xs.btn-danger{'ng-if' => 'requestControl.commentBeingEdited.rating === 1'} 1
+
+                            %button.btn.btn-xs{'ng-if' => 'requestControl.commentBeingEdited.rating !== 2', 'ng-click' => 'requestControl.commentBeingEdited.rating = 2'} 2
+                            %button.btn.btn-xs.btn-danger{'ng-if' => 'requestControl.commentBeingEdited.rating === 2'} 2
+
+                            %button.btn.btn-xs{'ng-if' => 'requestControl.commentBeingEdited.rating !== 3', 'ng-click' => 'requestControl.commentBeingEdited.rating = 3'} 3
+                            %button.btn.btn-xs.btn-danger{'ng-if' => 'requestControl.commentBeingEdited.rating === 3'} 3
+
+                            %button.btn.btn-xs{'ng-if' => 'requestControl.commentBeingEdited.rating !== 4', 'ng-click' => 'requestControl.commentBeingEdited.rating = 4'} 4
+                            %button.btn.btn-xs.btn-danger{'ng-if' => 'requestControl.commentBeingEdited.rating === 4'} 4
+
+                            %button.btn.btn-xs{'ng-if' => 'requestControl.commentBeingEdited.rating !== 5', 'ng-click' => 'requestControl.commentBeingEdited.rating = 5'} 5
+                            %button.btn.btn-xs.btn-danger{'ng-if' => 'requestControl.commentBeingEdited.rating === 5'} 5
+
+                          %br
+                          %p
+                            %input.form-control.input-sm{:placeholder => "Enter a comment...", 'ng-model' => 'requestControl.commentBeingEdited.text'}
+                        .form-actions
+                          .pull-right
+                            %button.btn.btn-xs.btn-success{'ng-click' => 'requestControl.updateEventComment($index)'} Update
 
                 %form
                   .form-group
