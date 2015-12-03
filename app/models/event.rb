@@ -11,6 +11,19 @@ class Event < ActiveRecord::Base
   has_many :comments, as: :commentable
   has_many :likes, as: :likeable
 
+  after_create :setup_event
+  after_validation :create_full_address
+
+  def setup_event
+    self.create_full_address
+  end
+
+  def create_full_address
+    unless self.try(:address).nil? || self.try(:postal_code).nil? || self.try(:state).nil?
+      self.address = "#{self.address} #{self.city} #{self.state} #{self.postal_code}"
+    end
+  end
+
   def self.get_events(options = {})
   	data = {:errors => false}
 
