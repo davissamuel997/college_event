@@ -64,8 +64,17 @@ collegeEvent.controller 'EventsController', ['$scope', '$http', 'EventsService',
       )
 
 
-    updateEventComment: (commentIndex) ->
-      debugger
+    updateEventComment: (commentIndex, eventIndex) ->
+      if this.commentBeingEdited && this.commentBeingEdited.comment_id && this.commentBeingEdited.comment_id > 0 && this.commentBeingEdited.text && this.commentBeingEdited.text.length > 0 && this.commentBeingEdited.rating && parseInt(this.commentBeingEdited.rating, 10) > 0
+        this.eventIndex = eventIndex
+
+        EventsService.updateComment.query({ comment_id: this.commentBeingEdited.comment_id, text: this.commentBeingEdited.text, rating: this.commentBeingEdited.rating }, (responseData) ->
+          if responseData.errors == false
+            $scope.requestControl.events[$scope.requestControl.eventIndex].comments = responseData.comments
+
+            $scope.requestControl.commentBeingEdited = null
+            $scope.requestControl.isEditingComment = false
+        )
 
   }
 

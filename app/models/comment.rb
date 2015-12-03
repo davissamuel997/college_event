@@ -32,6 +32,24 @@ class Comment < ActiveRecord::Base
   	user
   end
 
+  def self.update_comment(options = {})
+    data = {:errors => false}
+
+    if options[:comment_id].present? && options[:comment_id].to_i > 0 && options[:text].present? && options[:text].size > 0 && options[:rating].present? && options[:rating].to_i > 0
+      comment = Comment.find(options[:comment_id])
+
+      if comment.present? && comment.is_a?(Comment) && comment.update(text: options[:text], rating: options[:rating].to_i)
+        data[:comments] = comment.commentable.comments.order('created_at ASC').map{ |c| c.get_params } 
+      else
+        data[:errors] = true
+      end
+    else
+      data[:errors] = true
+    end
+
+    data
+  end
+
   def get_params
     {
       comment_id: id,

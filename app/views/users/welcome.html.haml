@@ -10,7 +10,7 @@
       / START dashboard main content
       %section.col-md-12
         / START chart
-        .row{'ng-repeat' => 'event in requestControl.events', 'ng-if' => 'requestControl.events.length > 0'}
+        .row{'ng-repeat' => 'event in requestControl.events', 'ng-if' => 'requestControl.events.length > 0', 'ng-init' => "rowIndex = $index"}
           .panel.panel-default
             .panel-heading
               .panel-title {{event.name}}
@@ -130,7 +130,7 @@
                             %input.form-control.input-sm{:placeholder => "Enter a comment...", 'ng-model' => 'requestControl.commentBeingEdited.text'}
                         .form-actions
                           .pull-right
-                            %button.btn.btn-xs.btn-success{'ng-click' => 'requestControl.updateEventComment($index)'} Update
+                            %button.btn.btn-xs.btn-success{'ng-click' => 'requestControl.updateEventComment($index, rowIndex)'} Update
 
                 %form
                   .form-group

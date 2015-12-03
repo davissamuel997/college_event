@@ -10,4 +10,6 @@ collegeEvent.factory 'EventsService', ['$resource', '$q', '$http', ($resource, $
 
   getEvents: $resource "/get_events.json", {}, query: { method: 'GET', isArray: false }
 
+  updateComment: $resource "/update_comment.json", {}, query: { method: 'GET', isArray: false }
+
 ]
