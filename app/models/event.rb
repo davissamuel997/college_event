@@ -37,10 +37,12 @@ class Event < ActiveRecord::Base
   	user = options[:current_user]
 
   	if user.present? && user.is_a?(User)
-      organization_ids = user.organizations.map(&:id)
-      event_status_ids = EventStatus.where(name: "Public").map(&:id)
+      organization_ids   = user.organizations.map(&:id)
+      private_status_ids = EventStatus.where(name: "Private").map(&:id)
+      rso_status_ids     = EventStatus.where(name: "RSO").map(&:id)
+      public_status_ids  = EventStatus.where(name: "Public").map(&:id)
 
-  		data[:events] = Event.where("university_id = ? OR organization_id IN (?) OR event_status_id IN (?)", user.university_id, organization_ids, event_status_ids).order('date DESC').map{ |event| event.get_params }
+  		data[:events] = Event.where("(event_status_id IN (?) AND university_id = ?) OR (event_status_id IN (?) AND organization_id IN (?)) OR event_status_id IN (?)", private_status_ids, user.university_id, rso_status_ids, organization_ids, public_status_ids).order('date DESC').map{ |event| event.get_params }
   	else
   		data[:errors] = true
   	end
