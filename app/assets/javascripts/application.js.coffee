@@ -1,5 +1,4 @@
 
-
 $ ->
   alert_div = $("#alert_notification")
   if alert_div[0]

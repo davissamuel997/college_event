@@ -1,4 +1,4 @@
-%section
+%section{'ng-controller' => "EventsShowController"}
   .content-wrapper
     %h3
       Event Details
@@ -77,9 +77,6 @@
               %td.text-center
                 %button.btn.btn-link.make-black
                   = @event.postal_code
-              / %td.text-center
-              /   %button.btn.btn-link{type: "button", 'data-toggle' => 'modal', href: "#view_map"}
-              /     View Map
 
         %br
         %p
@@ -87,9 +84,9 @@
 
         %br
 
-        #map
+        %span.col-md-12
+          #map{:style => "height: 400px;"}
 
-        %br
         %br
 
         %article.hentry.post
@@ -126,32 +123,7 @@
                   / .btn-group.no-margin{style: "float: right;"}
                   %button.btn.btn-sm.btn-success{'ng-click' => 'requestControl.postComment()'} Post Comment
         
-  .modal.fade{id: "view_map", style: "display: none;"}
-    .modal-dialog
-      .modal-content
-        .modal-header.badge-info
-          %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
 
-          %h5
-            %strong Viewing Map
 
-        .modal-body
 
-        .modal-footer
-          %button.btn.btn.btn-sm.btn-default{"aria-hidden" => "true", "data-dismiss" => "modal"} Close
-
-= javascript_include_tag "https://maps.googleapis.com/maps/api/js"
-
-:javascript
-  function initialize() {
-    var mapCanvas = document.getElementById('map');
-    var mapOptions = {
-      center: new google.maps.LatLng(44.5403, -78.5463),
-      zoom: 8,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    }
-    var map = new google.maps.Map(mapCanvas, mapOptions)
-  }
-
-  google.maps.event.addDomListener(window, 'load', initialize);
               

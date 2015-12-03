@@ -20,7 +20,14 @@ class Event < ActiveRecord::Base
 
   def create_full_address
     unless self.try(:address).nil? || self.try(:postal_code).nil? || self.try(:state).nil?
-      self.address = "#{self.address} #{self.city} #{self.state} #{self.postal_code}"
+      self.full_street_address = "#{self.address} #{self.city} #{self.state} #{self.postal_code}"
+
+      coordinates = Geocoder.coordinates(self.full_street_address)
+
+      if coordinates.present? && coordinates.count > 0
+        self.latitude  = coordinates.first
+        self.longitude = coordinates.last
+      end
     end
   end
 
